@@ -69,12 +69,15 @@ export class ClinicRun extends Component {
             } catch (e) {}
         }
         if (actionType === "close_shift") {
-            try {
-                const result = await this.orm.call("clinic.shift", "action_close", [[shiftId]]);
-                if (result) {
-                    this.action.doAction(result);
-                }
-            } catch (e) {}
+            this.action.doAction({
+                type: "ir.actions.act_window",
+                name: "Close Shift",
+                res_model: "close.shift.wizard",
+                view_mode: "form",
+                views: [[false, "form"]],
+                target: "new",
+                context: { default_shift_id: shiftId },
+            });
         }
     }
 

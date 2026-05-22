@@ -168,6 +168,7 @@ class ClinicShift(models.Model):
             'name': _('Close Shift'),
             'res_model': 'close.shift.wizard',
             'view_mode': 'form',
+            'views': [[False, 'form']],
             'target': 'new',
             'context': {'default_shift_id': self.id},
         }

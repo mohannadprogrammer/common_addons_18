@@ -23,6 +23,7 @@
         'views/clinic_patient_views.xml',
         'views/menu_views.xml',
         'wizard/close_shift_wizard_views.xml',
+        'views/receipt_report.xml',
     ],
     'assets': {
         'web.assets_backend': [
