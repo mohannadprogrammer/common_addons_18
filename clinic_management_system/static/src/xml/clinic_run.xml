@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="clinic_run.main" owl="1">
+        <div class="o_clinic_run">
+            <div class="o_clinic_run_header">
+                <h1><i class="fa fa-hospital-o me-2"/>Clinic Run</h1>
+                <button class="btn btn-secondary" t-on-click="closeApp">
+                    <i class="fa fa-times me-1"/>Close
+                </button>
+            </div>
+            <div class="o_clinic_run_content">
+                <div class="o_clinic_run_stats">
+                    <div class="stat-card">
+                        <span class="stat-value" t-esc="state.stats.total"/>
+                        <span class="stat-label">Total Shifts</span>
+                    </div>
+                    <div class="stat-card stat-draft">
+                        <span class="stat-value" t-esc="state.stats.draft"/>
+                        <span class="stat-label">Draft</span>
+                    </div>
+                    <div class="stat-card stat-open">
+                        <span class="stat-value" t-esc="state.stats.open"/>
+                        <span class="stat-label">Open</span>
+                    </div>
+                    <div class="stat-card stat-closed">
+                        <span class="stat-value" t-esc="state.stats.closed"/>
+                        <span class="stat-label">Closed</span>
+                    </div>
+                </div>
+                <div class="o_clinic_run_toolbar">
+                    <div class="btn-group">
+                        <button class="btn btn-sm" t-att-class="state.filter == 'all' ? 'btn-primary' : 'btn-outline-secondary'" t-on-click="() => this.setFilter('all')">All</button>
+                        <button class="btn btn-sm" t-att-class="state.filter == 'draft' ? 'btn-primary' : 'btn-outline-secondary'" t-on-click="() => this.setFilter('draft')">Draft</button>
+                        <button class="btn btn-sm" t-att-class="state.filter == 'open' ? 'btn-primary' : 'btn-outline-secondary'" t-on-click="() => this.setFilter('open')">Open</button>
+                        <button class="btn btn-sm" t-att-class="state.filter == 'closed' ? 'btn-primary' : 'btn-outline-secondary'" t-on-click="() => this.setFilter('closed')">Closed</button>
+                    </div>
+                    <button class="btn btn-success btn-sm" t-on-click="openNewShift">
+                        <i class="fa fa-plus me-1"/>New Shift
+                    </button>
+                </div>
+                <div class="o_clinic_run_shifts">
+                    <t t-foreach="filteredShifts" t-as="shift" t-key="shift.id">
+                        <div class="shift-card" t-att-class="'shift-' + shift.state">
+                            <div class="shift-card-header">
+                                <span class="shift-name" t-esc="shift.name"/>
+                                <span class="shift-badge" t-att-class="'badge-' + shift.state" t-esc="shift.state"/>
+                            </div>
+                            <div class="shift-card-body">
+                                <div class="shift-info">
+                                    <i class="fa fa-calendar me-1"/>
+                                    <span t-esc="shift.date"/>
+                                </div>
+                                <div class="shift-info">
+                                    <i class="fa fa-clock-o me-1"/>
+                                    <span t-esc="shift.shift_type == 'day' ? 'Day Shift' : 'Night Shift'"/>
+                                </div>
+                                <div class="shift-doctors" t-if="shift.doctor_names">
+                                    <i class="fa fa-user-md me-1"/>
+                                    <span t-esc="shift.doctor_names"/>
+                                </div>
+                                <div class="shift-info">
+                                    <i class="fa fa-calendar-check-o me-1"/>
+                                    <span t-esc="shift.appointment_count + ' appointments'"/>
+                                </div>
+                            </div>
+                            <div class="shift-card-footer">
+                                <button class="btn btn-sm btn-primary" t-on-click="() => this.openShift(shift.id)">
+                                    <i class="fa fa-eye me-1"/>Open
+                                </button>
+                                <button class="btn btn-sm btn-warning" t-if="shift.state == 'draft'" t-on-click="() => this.confirmAction(shift.id, 'open_shift')">
+                                    <i class="fa fa-play me-1"/>Start
+                                </button>
+                                <button class="btn btn-sm btn-danger" t-if="shift.state == 'open'" t-on-click="() => this.confirmAction(shift.id, 'close_shift')">
+                                    <i class="fa fa-stop me-1"/>Close
+                                </button>
+                            </div>
+                        </div>
+                    </t>
+                    <div class="o_clinic_run_empty" t-if="filteredShifts.length == 0">
+                        <i class="fa fa-inbox fa-3x"/>
+                        <p>No shifts found</p>
+                    </div>
+                </div>
+            </div>
+            <div class="o_clinic_run_footer">
+                <span>Clinic Management System</span>
+            </div>
+        </div>
+    </t>
+</templates>

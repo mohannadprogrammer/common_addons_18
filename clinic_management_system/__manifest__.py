@@ -24,6 +24,13 @@
         'views/menu_views.xml',
         'wizard/close_shift_wizard_views.xml',
     ],
+    'assets': {
+        'web.assets_backend': [
+            'clinic_management_system/static/src/scss/clinic_run.scss',
+            'clinic_management_system/static/src/xml/clinic_run.xml',
+            'clinic_management_system/static/src/js/clinic_run.js',
+        ],
+    },
     'installable': True,
     'application': True,
     'license': 'LGPL-3',
