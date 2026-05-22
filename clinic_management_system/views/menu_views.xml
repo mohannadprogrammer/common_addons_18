@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_clinic_root" name="Clinic" sequence="10"/>
+
+    <menuitem id="menu_clinic_operations" name="Operations" parent="menu_clinic_root" sequence="10"/>
+
+    <menuitem id="menu_clinic_shift" name="Shifts"
+              parent="menu_clinic_operations"
+              action="action_clinic_shift"
+              sequence="10"/>
+
+    <menuitem id="menu_clinic_appointment" name="Appointments"
+              parent="menu_clinic_operations"
+              action="action_clinic_appointment_all"
+              sequence="20"/>
+
+    <menuitem id="menu_clinic_masters" name="Masters" parent="menu_clinic_root" sequence="20"/>
+
+    <menuitem id="menu_clinic_doctor" name="Doctors"
+              parent="menu_clinic_masters"
+              action="action_clinic_doctor"
+              sequence="10"/>
+
+    <menuitem id="menu_clinic_patient" name="Patients"
+              parent="menu_clinic_masters"
+              action="action_clinic_patient"
+              sequence="20"/>
+</odoo>

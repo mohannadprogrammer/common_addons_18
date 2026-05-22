@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_clinic_patient_form" model="ir.ui.view">
+        <field name="name">clinic.patient.form</field>
+        <field name="model">clinic.patient</field>
+        <field name="arch" type="xml">
+            <form string="Patient">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="%(action_clinic_appointment_all)d"
+                                type="action"
+                                class="oe_stat_button"
+                                icon="fa-calendar-check-o"
+                                 context="{'search_default_patient_id': id}">
+                            <div class="o_stat_info">
+                                <field name="appointment_count" widget="statinfo"/>
+                                <span>Appointments</span>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Personal Information">
+                            <field name="phone"/>
+                            <field name="age"/>
+                            <field name="gender"/>
+                            <field name="date_of_birth"/>
+                        </group>
+                        <group string="Address">
+                            <field name="address" nolabel="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Appointments">
+                            <field name="appointment_ids">
+                                <list string="Appointments">
+                                    <field name="name"/>
+                                    <field name="doctor_id"/>
+                                    <field name="shift_id"/>
+                                    <field name="appointment_date"/>
+                                    <field name="visit_fee"/>
+                                    <field name="state" widget="badge"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Invoices">
+                            <field name="invoice_ids">
+                                <list string="Invoices">
+                                    <field name="name"/>
+                                    <field name="invoice_date"/>
+                                    <field name="amount_total" widget="monetary"/>
+                                    <field name="state" widget="badge"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_clinic_patient_list" model="ir.ui.view">
+        <field name="name">clinic.patient.list</field>
+        <field name="model">clinic.patient</field>
+        <field name="arch" type="xml">
+            <list string="Patients">
+                <field name="name"/>
+                <field name="phone"/>
+                <field name="age"/>
+                <field name="gender"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_clinic_patient_search" model="ir.ui.view">
+        <field name="name">clinic.patient.search</field>
+        <field name="model">clinic.patient</field>
+        <field name="arch" type="xml">
+            <search string="Patients">
+                <field name="name"/>
+                <field name="phone"/>
+                <filter string="Male" name="male" domain="[('gender', '=', 'male')]"/>
+                <filter string="Female" name="female" domain="[('gender', '=', 'female')]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_clinic_patient" model="ir.actions.act_window">
+        <field name="name">Patients</field>
+        <field name="res_model">clinic.patient</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_clinic_patient_search"/>
+    </record>
+</odoo>
