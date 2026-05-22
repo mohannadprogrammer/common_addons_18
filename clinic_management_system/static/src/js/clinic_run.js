@@ -41,10 +41,12 @@ export class ClinicRun extends Component {
     openShift(shiftId) {
         this.action.doAction({
             type: "ir.actions.act_window",
-            res_model: "clinic.shift",
-            res_id: shiftId,
-            view_mode: "form",
-            views: [[false, "form"]],
+            name: "Appointments",
+            res_model: "clinic.appointment",
+            view_mode: "kanban,list,form",
+            views: [[false, "kanban"], [false, "list"], [false, "form"]],
+            domain: [["shift_id", "=", shiftId]],
+            context: { default_shift_id: shiftId },
         });
     }
 

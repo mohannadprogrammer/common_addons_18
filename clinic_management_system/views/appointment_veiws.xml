@@ -5,9 +5,10 @@
         <field name="name">clinic.appointment.kanban</field>
         <field name="model">clinic.appointment</field>
         <field name="arch" type="xml">
-            <kanban default_group_by="state"
+            <kanban default_group_by="doctor_id"
                     class="o_kanban_small_column"
-                    quick_create="false">
+                    quick_create="doctor_id"
+                    quick_create_fields="['patient_id', 'shift_id', 'appointment_date', 'product_id']">
                 <field name="name"/>
                 <field name="patient_id"/>
                 <field name="doctor_id"/>
@@ -19,6 +20,7 @@
                 <field name="color"/>
                 <field name="kanban_state"/>
                 <field name="invoice_id"/>
+                <field name="product_id"/>
                 <progressbar field="kanban_state"
                              colors='{"normal": "200", "done": "success", "blocked": "danger"}'/>
                 <templates>

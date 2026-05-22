@@ -10,7 +10,8 @@ class ClinicAppointment(models.Model):
 
     name = fields.Char(string='Reference', readonly=True, copy=False, default='New', tracking=True)
     patient_id = fields.Many2one('clinic.patient', string='Patient', required=True, tracking=True)
-    doctor_id = fields.Many2one('clinic.doctor', string='Doctor', required=True, tracking=True)
+    doctor_id = fields.Many2one('clinic.doctor', string='Doctor', required=True, tracking=True,
+                                group_expand='_expand_doctor_ids')
     shift_id = fields.Many2one('clinic.shift', string='Shift', tracking=True)
     appointment_date = fields.Datetime(string='Appointment Date', required=True, default=fields.Datetime.now, tracking=True)
     product_id = fields.Many2one('product.product', string='Service Product',
@@ -52,6 +53,21 @@ class ClinicAppointment(models.Model):
             self.product_id = self.doctor_id.product_id
             if self.doctor_id.product_id:
                 self.visit_fee = self.doctor_id.product_id.list_price
+
+    @api.model
+    def _expand_doctor_ids(self, doctors, domain):
+        for clause in domain:
+            if isinstance(clause, (list, tuple)) and len(clause) >= 3 and clause[0] == 'shift_id' and clause[1] == '=':
+                shift = self.env['clinic.shift'].browse(clause[2])
+                if shift.exists() and shift.doctor_ids:
+                    return shift.doctor_ids
+                break
+        shift_id = self.env.context.get('default_shift_id')
+        if shift_id:
+            shift = self.env['clinic.shift'].browse(shift_id)
+            if shift.exists() and shift.doctor_ids:
+                return shift.doctor_ids
+        return self.env['clinic.doctor'].search([])
 
     @api.model_create_multi
     def create(self, vals_list):
