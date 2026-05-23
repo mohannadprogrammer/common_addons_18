@@ -30,7 +30,8 @@
     </template>
 
     <template id="receipt_invoice_document">
-        <div style="width: 74mm; font-family: 'Courier New', monospace; font-size: 7px; line-height: 1.3;">
+        <div style="width: 74mm; font-family: 'DejaVu Sans Mono', 'Courier New', monospace; font-size: 7px; line-height: 1.3;">
+            <t t-set="fmt" t-value="formatted[o.id]"/>
 
             <div style="text-align: center; margin-bottom: 3px;">
                 <div style="font-size: 10px; font-weight: bold;">
@@ -97,16 +98,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <t t-foreach="o.invoice_line_ids" t-as="line">
+                    <t t-foreach="fmt['lines']" t-as="line">
                         <tr>
                             <td style="word-break: break-all; padding-right: 2px;">
-                                <span t-field="line.name"/>
+                                <span t-esc="line['name']"/>
                             </td>
                             <td style="text-align: right; white-space: nowrap;">
-                                <span t-field="line.quantity"/>
+                                <span t-esc="line['quantity']"/>
                             </td>
                             <td style="text-align: right; white-space: nowrap;">
-                                <span t-field="line.price_subtotal" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                <span t-esc="line['amount']"/>
                             </td>
                         </tr>
                     </t>
@@ -123,26 +124,26 @@
                 <tr t-if="o.amount_untaxed != o.amount_total">
                     <td>Subtotal</td>
                     <td style="text-align: right;">
-                        <span t-field="o.amount_untaxed" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                        <span t-esc="fmt['subtotal']"/>
                     </td>
                 </tr>
                 <tr t-if="o.amount_tax">
                     <td>Tax</td>
                     <td style="text-align: right;">
-                        <span t-field="o.amount_tax" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                        <span t-esc="fmt['tax']"/>
                     </td>
                 </tr>
                 <tr style="font-weight: bold; font-size: 9px;">
                     <td>Total</td>
                     <td style="text-align: right;">
-                        <span t-field="o.amount_total" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                        <span t-esc="fmt['total']"/>
                     </td>
                 </tr>
             </table>
 
             <div t-if="o.state == 'posted' and o.payment_state != 'paid'" style="font-size: 7px; margin-top: 3px; text-align: center;">
                 <strong>Amount Due: </strong>
-                <span t-field="o.amount_residual" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                <span t-esc="fmt['residual']"/>
             </div>
 
             <div t-if="o.invoice_payment_term_id" style="font-size: 6px; margin-top: 3px; text-align: center;">
