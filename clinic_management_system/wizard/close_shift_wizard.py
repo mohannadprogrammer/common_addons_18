@@ -20,6 +20,7 @@ class CloseShiftWizard(models.TransientModel):
             shift = self.env['clinic.shift'].browse(shift_id)
             invoiced = shift.appointment_ids.filtered(
                 lambda a: a.invoice_id and a.invoice_id.state == 'posted'
+                          and not (a.refund_invoice_id and a.refund_invoice_payment_state == 'paid')
             )
             res['total_revenue'] = sum(a.invoice_id.amount_total for a in invoiced)
             lines = []

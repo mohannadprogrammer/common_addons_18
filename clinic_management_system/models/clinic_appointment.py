@@ -22,6 +22,7 @@ class ClinicAppointment(models.Model):
 
     state = fields.Selection([
         ('draft', 'Scheduled'),
+        ('invoiced', 'Invoiced'),
         ('waiting', 'Waiting'),
         ('in_progress', 'In Progress'),
         ('done', 'Done'),
@@ -44,7 +45,8 @@ class ClinicAppointment(models.Model):
     invoice_id = fields.Many2one('account.move', string='Invoice', readonly=True, copy=False)
     invoice_state = fields.Selection(related='invoice_id.state', string='Invoice Status', readonly=True)
     invoice_payment_state = fields.Selection(related='invoice_id.payment_state', string='Invoice Payment Status', readonly=True)
-
+    refund_invoice_id = fields.Many2one('account.move', string='Refund Invoice', readonly=True, copy=False)
+    refund_invoice_payment_state = fields.Selection(related='refund_invoice_id.payment_state', string='Refund Payment Status', readonly=True)
 
     company_id = fields.Many2one('res.company', string='Company', default=lambda self: self.env.company)
 
@@ -77,40 +79,10 @@ class ClinicAppointment(models.Model):
                 vals['name'] = self.env['ir.sequence'].next_by_code('clinic.appointment') or 'New'
         return super().create(vals_list)
 
-    def action_waiting(self):
-        for rec in self:
-            if rec.state != 'draft':
-                raise UserError(_('Only scheduled appointments can be checked in.'))
-            rec.state = 'waiting'
-
-    def action_start(self):
-        for rec in self:
-            if rec.state not in ('draft', 'waiting'):
-                raise UserError(_('Appointment must be scheduled or waiting to start.'))
-            rec.state = 'in_progress'
-
-    def action_done(self):
-        for rec in self:
-            if rec.state != 'in_progress':
-                raise UserError(_('Only in-progress appointments can be completed.'))
-            rec.state = 'done'
-
-    def action_cancel(self):
-        for rec in self:
-            if rec.state in ('done', 'cancelled'):
-                raise UserError(_('Completed or already cancelled appointments cannot be cancelled.'))
-            rec.state = 'cancelled'
-
-    def action_reset(self):
-        for rec in self:
-            if rec.state != 'cancelled':
-                raise UserError(_('Only cancelled appointments can be reset.'))
-            rec.state = 'draft'
-
     def action_create_invoice(self):
         for rec in self:
-            if rec.state != 'done':
-                raise UserError(_('Only completed appointments can be invoiced.'))
+            if rec.state != 'draft':
+                raise UserError(_('Only scheduled appointments can be invoiced.'))
             if rec.invoice_id:
                 raise UserError(_('Invoice already created for this appointment.'))
             partner = rec.patient_id.partner_id
@@ -137,14 +109,67 @@ class ClinicAppointment(models.Model):
                 'invoice_date': fields.Date.today(),
                 'invoice_line_ids': [(0, 0, invoice_line_vals)],
             })
-            rec.invoice_id = invoice.id
+            rec.write({'invoice_id': invoice.id, 'state': 'invoiced'})
+
+    def action_waiting(self):
+        for rec in self:
+            if rec.state != 'invoiced':
+                raise UserError(_('Only invoiced appointments can be checked in.'))
+            rec.state = 'waiting'
+
+    def action_start(self):
+        for rec in self:
+            if rec.state != 'waiting':
+                raise UserError(_('Only waiting appointments can be started.'))
+            rec.state = 'in_progress'
+
+    def action_done(self):
+        for rec in self:
+            if rec.state != 'in_progress':
+                raise UserError(_('Only in-progress appointments can be completed.'))
+            rec.state = 'done'
+
+    def action_refund(self):
+        for rec in self:
+            if rec.state not in ('invoiced', 'in_progress', 'done'):
+                raise UserError(_('Only invoiced, in-progress, or done appointments can be refunded.'))
+            if not rec.invoice_id:
+                raise UserError(_('No invoice found to refund.'))
+            if rec.refund_invoice_id:
+                raise UserError(_('Refund already processed for this appointment.'))
+            refund = rec.invoice_id._reverse_moves(cancel=True)
+            rec.write({'refund_invoice_id': refund.id, 'state': 'cancelled'})
+
+    def action_cancel(self):
+        for rec in self:
+            if rec.state not in ('draft', 'invoiced', 'waiting'):
+                raise UserError(_('Only scheduled, invoiced, or waiting appointments can be cancelled.'))
+            rec.state = 'cancelled'
+
+    def action_reset(self):
+        for rec in self:
+            if rec.state != 'cancelled':
+                raise UserError(_('Only cancelled appointments can be reset.'))
+            rec.state = 'draft'
 
     def action_view_invoice(self):
         self.ensure_one()
-        return {
-            'type': 'ir.actions.act_window',
-            'name': _('Invoice'),
-            'res_model': 'account.move',
-            'view_mode': 'form',
-            'res_id': self.invoice_id.id,
-        }
+        if self.invoice_id:
+            return {
+                'type': 'ir.actions.act_window',
+                'name': _('Invoice'),
+                'res_model': 'account.move',
+                'view_mode': 'form',
+                'res_id': self.invoice_id.id,
+            }
+
+    def action_view_refund(self):
+        self.ensure_one()
+        if self.refund_invoice_id:
+            return {
+                'type': 'ir.actions.act_window',
+                'name': _('Refund'),
+                'res_model': 'account.move',
+                'view_mode': 'form',
+                'res_id': self.refund_invoice_id.id,
+            }

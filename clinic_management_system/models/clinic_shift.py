@@ -72,11 +72,13 @@ class ClinicShift(models.Model):
         string='Total Doctor Billing', compute='_compute_totals', store=True
     )
 
-    @api.depends('appointment_ids.invoice_id.amount_total', 'appointment_ids.visit_fee', 'appointment_ids.state')
+    @api.depends('appointment_ids.invoice_id.amount_total', 'appointment_ids.visit_fee', 'appointment_ids.state',
+                 'appointment_ids.refund_invoice_id', 'appointment_ids.refund_invoice_payment_state')
     def _compute_totals(self):
         for shift in self:
             invoiced_appointments = shift.appointment_ids.filtered(
                 lambda a: a.invoice_id and a.invoice_id.state == 'posted'
+                          and not (a.refund_invoice_id and a.refund_invoice_payment_state == 'paid')
             )
             shift.total_revenue = sum(a.invoice_id.amount_total for a in invoiced_appointments)
             shift.total_doctor_billing = sum(

@@ -23,13 +23,18 @@
                 <field name="invoice_state"/>
                 <field name="invoice_payment_state"/>
                 <field name="product_id"/>
+                <field name="refund_invoice_id"/>
+                <field name="refund_invoice_payment_state"/>
                 <progressbar field="kanban_state"
                              colors='{"waiting": "info", "done": "success", "cancelled": "danger"}'/>
                 <templates>
                     <t t-name="card">
                         <div t-attf-class="oe_kanban_color_#{record.color.raw_value} oe_kanban_card oe_kanban_global_click"
-                             t-att-style="record.invoice_payment_state.raw_value == 'paid' and 'border-top: 3px solid #4caf50;' or (record.invoice_state.raw_value == 'posted' and 'border-top: 3px solid #f44336;') or (record.invoice_id.raw_value and 'border-top: 3px solid #ff9800;') or ''">
-                            <div t-if="record.invoice_id.raw_value" class="o_kanban_record_banner"
+                             t-att-style="record.refund_invoice_id.raw_value and 'border-top: 3px solid #7b1fa2;' or (record.invoice_payment_state.raw_value == 'paid' and 'border-top: 3px solid #4caf50;') or (record.invoice_state.raw_value == 'posted' and 'border-top: 3px solid #f44336;') or (record.invoice_id.raw_value and 'border-top: 3px solid #ff9800;') or ''">
+                            <div t-if="record.refund_invoice_id.raw_value" class="o_kanban_record_banner" style="background: #7b1fa2; color: #fff;">
+                                <i class="fa fa-undo"/> REFUNDED
+                            </div>
+                            <div t-elif="record.invoice_id.raw_value" class="o_kanban_record_banner"
                                  t-att-style="record.invoice_payment_state.raw_value == 'paid' and 'background: #4caf50; color: #fff;' or (record.invoice_state.raw_value == 'posted' and 'background: #f44336; color: #fff;') or 'background: #ff9800; color: #fff;'">
                                 <t t-if="record.invoice_payment_state.raw_value == 'paid'"><i class="fa fa-check-circle"/> PAID</t>
                                 <t t-elif="record.invoice_state.raw_value == 'posted'"><i class="fa fa-exclamation-circle"/> UNPAID</t>
@@ -83,24 +88,28 @@
         <field name="arch" type="xml">
             <form string="Appointment">
                 <header>
+                    <button name="action_create_invoice" string="Create Invoice &amp; Check In" type="object"
+                            class="oe_highlight"
+                            invisible="state != 'draft' or invoice_id != False"/>
                     <button name="action_waiting" string="Check In" type="object"
                             class="oe_highlight"
-                            invisible="state != 'draft'"/>
+                            invisible="state != 'invoiced'"/>
                     <button name="action_start" string="Start Consultation" type="object"
                             class="oe_highlight"
-                            invisible="state not in ('draft', 'waiting')"/>
+                            invisible="state != 'waiting'"/>
                     <button name="action_done" string="Complete" type="object"
                             class="oe_highlight"
                             invisible="state != 'in_progress'"/>
-                    <button name="action_create_invoice" string="Create Invoice" type="object"
-                            class="oe_highlight"
-                            invisible="state != 'done' or invoice_id != False"/>
                     <button name="action_cancel" string="Cancel" type="object"
-                            invisible="state in ('done', 'cancelled')"/>
+                            invisible="state not in ('draft', 'invoiced', 'waiting')"/>
+                    <button name="action_refund" string="Refund" type="object"
+                            class="btn-danger"
+                            invisible="state not in ('invoiced', 'in_progress', 'done') or refund_invoice_id != False"/>
                     <button name="action_reset" string="Reset" type="object"
                             invisible="state != 'cancelled'"/>
                     <field name="state" widget="statusbar"
-                           statusbar_visible="draft,waiting,in_progress,done"/>
+                           statusbar_visible="draft,invoiced,waiting,in_progress,done"
+                           statusbar_colors='{"invoiced":"blue","waiting":"info","in_progress":"warning","done":"success"}'/>
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
@@ -110,6 +119,13 @@
                                 icon="fa-file-text-o"
                                 invisible="not invoice_id">
                             <span>Invoice</span>
+                        </button>
+                        <button name="action_view_refund"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-undo"
+                                invisible="not refund_invoice_id">
+                            <span>Refund</span>
                         </button>
                     </div>
                     <widget name="web_ribbon" title="Cancelled"
@@ -122,19 +138,21 @@
                     </div>
                     <group>
                         <group string="Appointment Details">
-                            <field name="patient_id" readonly="state in ('in_progress', 'done')"/>
-                            <field name="doctor_id" readonly="state in ('in_progress', 'done')"/>
-                            <field name="product_id" readonly="state in ('in_progress', 'done')"/>
-                            <field name="shift_id" readonly="state in ('in_progress', 'done')"/>
-                            <field name="appointment_date" readonly="state in ('in_progress', 'done')"/>
-                            <field name="priority" widget="priority" readonly="state in ('in_progress', 'done')"/>
+                            <field name="patient_id" readonly="state in ('invoiced', 'waiting', 'in_progress', 'done')"/>
+                            <field name="doctor_id" readonly="state in ('invoiced', 'waiting', 'in_progress', 'done')"/>
+                            <field name="product_id" readonly="state in ('invoiced', 'waiting', 'in_progress', 'done')"/>
+                            <field name="shift_id" readonly="state in ('invoiced', 'waiting', 'in_progress', 'done')"/>
+                            <field name="appointment_date" readonly="state in ('invoiced', 'waiting', 'in_progress', 'done')"/>
+                            <field name="priority" widget="priority" readonly="state in ('invoiced', 'waiting', 'in_progress', 'done')"/>
                         </group>
                         <group string="Billing">
-                            <field name="visit_fee" readonly="state in ('in_progress', 'done')"/>
-                            <field name="currency_id" readonly="state in ('in_progress', 'done')"/>
+                            <field name="visit_fee" readonly="state in ('invoiced', 'waiting', 'in_progress', 'done')"/>
+                            <field name="currency_id" readonly="state in ('invoiced', 'waiting', 'in_progress', 'done')"/>
                             <field name="invoice_id" readonly="1"/>
                             <field name="invoice_state" readonly="1"
                                    invisible="not invoice_id"/>
+                            <field name="refund_invoice_id" readonly="1"
+                                   invisible="not refund_invoice_id"/>
                         </group>
                     </group>
                     <group string="Notes / Diagnosis">
@@ -183,11 +201,10 @@
                 <field name="doctor_id"/>
                 <field name="shift_id"/>
                 <filter string="Scheduled" name="draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="Invoiced" name="invoiced" domain="[('state', '=', 'invoiced')]"/>
                 <filter string="Waiting" name="waiting" domain="[('state', '=', 'waiting')]"/>
                 <filter string="In Progress" name="in_progress" domain="[('state', '=', 'in_progress')]"/>
                 <filter string="Done" name="done" domain="[('state', '=', 'done')]"/>
-                <filter string="Not Invoiced" name="not_invoiced"
-                        domain="[('state', '=', 'done'), ('invoice_id', '=', False)]"/>
                 <separator/>
                 <filter string="Today" name="today"
                         date="appointment_date"/>
