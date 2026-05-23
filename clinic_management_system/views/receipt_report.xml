@@ -12,11 +12,16 @@
         <field name="margin_right">3</field>
         <field name="header_line">False</field>
         <field name="header_spacing">0</field>
-        <field name="dpi">203</field>
+        <field name="dpi">90</field>
     </record>
 
     <template id="receipt_invoice">
         <t t-call="web.html_container">
+            <style>
+                .container { padding: 0 2px !important; max-width: 74mm !important; }
+                table { border-collapse: collapse; width: 100%; }
+                td { vertical-align: top; }
+            </style>
             <t t-foreach="docs" t-as="o">
                 <t t-set="lang" t-value="o.partner_id.lang or o.company_id.partner_id.lang"/>
                 <t t-call="clinic_management_system.receipt_invoice_document" t-lang="lang"/>
@@ -25,29 +30,27 @@
     </template>
 
     <template id="receipt_invoice_document">
-        <div class="receipt" style="font-family: 'Courier New', monospace; font-size: 10px; max-width: 74mm; margin: 0 auto;">
-            <div style="text-align: center; margin-bottom: 8px;">
-                <h2 style="margin: 0; font-size: 14px; font-weight: bold;">
+        <div style="width: 74mm; font-family: 'Courier New', monospace; font-size: 7px; line-height: 1.3;">
+
+            <div style="text-align: center; margin-bottom: 3px;">
+                <div style="font-size: 10px; font-weight: bold;">
                     <span t-field="o.company_id.name"/>
-                </h2>
-                <div t-if="o.company_id.phone" style="font-size: 9px;">
-                    Tel: <span t-field="o.company_id.phone"/>
                 </div>
-                <div t-if="o.company_id.email" style="font-size: 9px;">
-                    <span t-field="o.company_id.email"/>
-                </div>
-                <div t-if="o.company_id.street" style="font-size: 9px;">
+                <div t-if="o.company_id.street" style="font-size: 6px;">
                     <span t-field="o.company_id.street"/>
                 </div>
+                <div t-if="o.company_id.phone" style="font-size: 6px;">
+                    Tel: <span t-field="o.company_id.phone"/>
+                </div>
             </div>
 
-            <div style="text-align: center; border-top: 1px dashed #000; border-bottom: 1px dashed #000; padding: 4px 0; margin-bottom: 8px;">
-                <strong style="font-size: 12px;">RECEIPT</strong>
+            <div style="text-align: center; border-top: 1px dashed #000; border-bottom: 1px dashed #000; padding: 1px 0; margin-bottom: 3px;">
+                <strong style="font-size: 9px;">RECEIPT</strong>
             </div>
 
-            <table style="width: 100%; font-size: 9px; margin-bottom: 6px;">
+            <table style="font-size: 7px; margin-bottom: 3px;">
                 <tr>
-                    <td style="width: 35%;">Receipt No:</td>
+                    <td style="width: 25mm;">Receipt No:</td>
                     <td><strong><span t-field="o.name"/></strong></td>
                 </tr>
                 <tr>
@@ -57,21 +60,11 @@
                 <tr t-if="o.state == 'posted'">
                     <td>Status:</td>
                     <td>
-                        <t t-if="o.payment_state == 'paid'">
-                            <strong style="color: #2e7d32;">PAID</strong>
-                        </t>
-                        <t t-elif="o.payment_state == 'partial'">
-                            <strong style="color: #e65100;">PARTIAL</strong>
-                        </t>
-                        <t t-elif="o.payment_state == 'not_paid'">
-                            <strong style="color: #c62828;">UNPAID</strong>
-                        </t>
-                        <t t-elif="o.payment_state == 'in_payment'">
-                            <strong style="color: #1565c0;">IN PAYMENT</strong>
-                        </t>
-                        <t t-else="">
-                            <strong><span t-field="o.payment_state"/></strong>
-                        </t>
+                        <t t-if="o.payment_state == 'paid'"><strong style="color: #2e7d32;">PAID</strong></t>
+                        <t t-elif="o.payment_state == 'partial'"><strong style="color: #e65100;">PARTIAL</strong></t>
+                        <t t-elif="o.payment_state == 'not_paid'"><strong style="color: #c62828;">UNPAID</strong></t>
+                        <t t-elif="o.payment_state == 'in_payment'"><strong style="color: #1565c0;">IN PAYMENT</strong></t>
+                        <t t-else=""><strong><span t-field="o.payment_state"/></strong></t>
                     </td>
                 </tr>
                 <tr t-if="o.patient_id">
@@ -88,25 +81,31 @@
                 </tr>
             </table>
 
-            <div style="border-top: 1px solid #000; margin-bottom: 4px;"></div>
+            <div style="border-top: 1px solid #000; margin-bottom: 2px;"></div>
 
-            <table style="width: 100%; font-size: 9px; margin-bottom: 4px;">
+            <table style="font-size: 7px; margin-bottom: 2px; table-layout: fixed;">
+                <colgroup>
+                    <col style="width: 38mm;"/>
+                    <col style="width: 15mm;"/>
+                    <col style="width: 21mm;"/>
+                </colgroup>
                 <thead>
                     <tr style="font-weight: bold;">
-                        <td style="width: 60%;">Description</td>
-                        <td style="width: 20%; text-align: right;">Qty</td>
-                        <td style="width: 20%; text-align: right;">Amount</td>
+                        <td>Item</td>
+                        <td style="text-align: right;">Qty</td>
+                        <td style="text-align: right;">Amount</td>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr style="border-top: 1px dotted #999;">
-                        <td colspan="3"></td>
-                    </tr>
                     <t t-foreach="o.invoice_line_ids" t-as="line">
                         <tr>
-                            <td><span t-field="line.name"/></td>
-                            <td style="text-align: right;"><span t-field="line.quantity"/></td>
-                            <td style="text-align: right;">
+                            <td style="word-break: break-all; padding-right: 2px;">
+                                <span t-field="line.name"/>
+                            </td>
+                            <td style="text-align: right; white-space: nowrap;">
+                                <span t-field="line.quantity"/>
+                            </td>
+                            <td style="text-align: right; white-space: nowrap;">
                                 <span t-field="line.price_subtotal" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
                             </td>
                         </tr>
@@ -114,11 +113,15 @@
                 </tbody>
             </table>
 
-            <div style="border-top: 1px solid #000; margin-bottom: 4px;"></div>
+            <div style="border-top: 1px solid #000; margin-bottom: 2px;"></div>
 
-            <table style="width: 100%; font-size: 9px;">
+            <table style="font-size: 7px; table-layout: fixed;">
+                <colgroup>
+                    <col style="width: 38mm;"/>
+                    <col style="width: 36mm;"/>
+                </colgroup>
                 <tr t-if="o.amount_untaxed != o.amount_total">
-                    <td style="width: 60%;">Subtotal</td>
+                    <td>Subtotal</td>
                     <td style="text-align: right;">
                         <span t-field="o.amount_untaxed" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
                     </td>
@@ -129,7 +132,7 @@
                         <span t-field="o.amount_tax" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
                     </td>
                 </tr>
-                <tr style="font-weight: bold; font-size: 11px;">
+                <tr style="font-weight: bold; font-size: 9px;">
                     <td>Total</td>
                     <td style="text-align: right;">
                         <span t-field="o.amount_total" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
@@ -137,16 +140,16 @@
                 </tr>
             </table>
 
-            <div t-if="o.invoice_payment_term_id" style="font-size: 8px; margin-top: 6px; text-align: center;">
-                <span t-field="o.invoice_payment_term_id.name"/>
-            </div>
-
-            <div t-if="o.state == 'posted' and o.payment_state != 'paid'" style="font-size: 9px; margin-top: 4px; text-align: center;">
+            <div t-if="o.state == 'posted' and o.payment_state != 'paid'" style="font-size: 7px; margin-top: 3px; text-align: center;">
                 <strong>Amount Due: </strong>
                 <span t-field="o.amount_residual" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
             </div>
 
-            <div style="border-top: 1px dashed #000; margin: 8px 0 4px; padding-top: 6px; text-align: center; font-size: 8px;">
+            <div t-if="o.invoice_payment_term_id" style="font-size: 6px; margin-top: 3px; text-align: center;">
+                <span t-field="o.invoice_payment_term_id.name"/>
+            </div>
+
+            <div style="border-top: 1px dashed #000; margin-top: 4px; padding-top: 3px; text-align: center; font-size: 6px;">
                 <span t-field="o.company_id.name"/>
                 <div t-if="o.company_id.vat">VAT: <span t-field="o.company_id.vat"/></div>
                 <div>Thank you for your visit!</div>
