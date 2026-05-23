@@ -36,13 +36,14 @@ class ClinicAppointment(models.Model):
     ], string='Priority', default='0')
     color = fields.Integer(string='Color')
     kanban_state = fields.Selection([
-        ('normal', 'In Progress'),
-        ('done', 'Ready for Next Stage'),
-        ('blocked', 'Blocked'),
-    ], string='Kanban State', default='normal')
+        ('waiting', 'Waiting'),
+        ('done', 'Done'),
+        ('cancelled', 'Cancelled'),
+    ], string='Kanban State', default='waiting')
 
     invoice_id = fields.Many2one('account.move', string='Invoice', readonly=True, copy=False)
     invoice_state = fields.Selection(related='invoice_id.state', string='Invoice Status', readonly=True)
+    invoice_payment_state = fields.Selection(related='invoice_id.payment_state', string='Invoice Payment Status', readonly=True)
 
 
     company_id = fields.Many2one('res.company', string='Company', default=lambda self: self.env.company)

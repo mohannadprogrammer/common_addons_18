@@ -20,12 +20,21 @@
                 <field name="color"/>
                 <field name="kanban_state"/>
                 <field name="invoice_id"/>
+                <field name="invoice_state"/>
+                <field name="invoice_payment_state"/>
                 <field name="product_id"/>
                 <progressbar field="kanban_state"
-                             colors='{"normal": "200", "done": "success", "blocked": "danger"}'/>
+                             colors='{"waiting": "info", "done": "success", "cancelled": "danger"}'/>
                 <templates>
                     <t t-name="card">
-                        <div t-attf-class="oe_kanban_color_#{record.color.raw_value} oe_kanban_card oe_kanban_global_click">
+                        <div t-attf-class="oe_kanban_color_#{record.color.raw_value} oe_kanban_card oe_kanban_global_click"
+                             t-att-style="record.invoice_payment_state.raw_value == 'paid' and 'border-top: 3px solid #4caf50;' or (record.invoice_state.raw_value == 'posted' and 'border-top: 3px solid #f44336;') or (record.invoice_id.raw_value and 'border-top: 3px solid #ff9800;') or ''">
+                            <div t-if="record.invoice_id.raw_value" class="o_kanban_record_banner"
+                                 t-att-style="record.invoice_payment_state.raw_value == 'paid' and 'background: #4caf50; color: #fff;' or (record.invoice_state.raw_value == 'posted' and 'background: #f44336; color: #fff;') or 'background: #ff9800; color: #fff;'">
+                                <t t-if="record.invoice_payment_state.raw_value == 'paid'"><i class="fa fa-check-circle"/> PAID</t>
+                                <t t-elif="record.invoice_state.raw_value == 'posted'"><i class="fa fa-exclamation-circle"/> UNPAID</t>
+                                <t t-else=""><i class="fa fa-file-text-o"/> <t t-esc="record.invoice_state.value"/></t>
+                            </div>
                             <div class="oe_kanban_content">
                                 <div class="o_kanban_record_top">
                                     <div class="o_kanban_record_headings">
@@ -50,18 +59,13 @@
                                         <i class="fa fa-money me-1"/>
                                         <field name="visit_fee" widget="monetary"/>
                                     </div>
-                                    <div t-if="record.invoice_id.raw_value">
-                                        <span class="badge bg-success">
-                                            <i class="fa fa-file-text-o me-1"/>Invoiced
-                                        </span>
-                                    </div>
                                 </div>
                                 <div class="o_kanban_record_bottom">
                                     <div class="oe_kanban_bottom_left">
                                         <field name="name" class="text-muted small"/>
                                     </div>
                                     <div class="oe_kanban_bottom_right">
-                                        <field name="kanban_state" widget="kanban_state_selection"/>
+                                        <field name="kanban_state" widget="state_selection"/>
                                     </div>
                                 </div>
                             </div>
