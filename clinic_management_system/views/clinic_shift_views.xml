@@ -45,27 +45,27 @@
                     </div>
                     <group>
                         <group string="Shift Details">
-                            <field name="shift_type"/>
-                            <field name="date"/>
-                            <field name="start_time"/>
-                            <field name="end_time"/>
-                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="shift_type" readonly="state == 'closed'"/>
+                            <field name="date" readonly="state == 'closed'"/>
+                            <field name="start_time" readonly="state == 'closed'"/>
+                            <field name="end_time" readonly="state == 'closed'"/>
+                            <field name="company_id" groups="base.group_multi_company" readonly="state == 'closed'"/>
                         </group>
                         <group string="Team">
-                            <field name="doctor_ids" widget="many2many_tags" readonly="state != 'draft'"/>
+                            <field name="doctor_ids" widget="many2many_tags" readonly="state in ('open', 'closed')"/>
                         </group>
                     </group>
                     <group string="Financial Summary">
                         <group>
-                            <field name="total_revenue"/>
+                            <field name="total_revenue" readonly="1"/>
                         </group>
                         <group>
-                            <field name="total_doctor_billing"/>
+                            <field name="total_doctor_billing" readonly="1"/>
                         </group>
                     </group>
                     <notebook>
                         <page string="Appointments">
-                            <field name="appointment_ids">
+                            <field name="appointment_ids" readonly="state == 'closed'">
                                 <list string="Appointments">
                                     <field name="name"/>
                                     <field name="patient_id"/>

@@ -136,6 +136,9 @@ class ClinicShift(models.Model):
         }
 
     def write(self, vals):
+        for rec in self:
+            if rec.state == 'closed':
+                raise UserError(_('Cannot modify a closed shift.'))
         if 'doctor_ids' in vals:
             for rec in self:
                 if rec.state != 'draft':
