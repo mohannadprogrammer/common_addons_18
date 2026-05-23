@@ -4,9 +4,7 @@
         <div class="o_clinic_run">
             <div class="o_clinic_run_header">
                 <h1><i class="fa fa-hospital-o me-2"/>Clinic Run</h1>
-                <button class="btn btn-secondary" t-on-click="closeApp">
-                    <i class="fa fa-times me-1"/>Close
-                </button>
+                
             </div>
             <div class="o_clinic_run_content">
                 <div class="o_clinic_run_stats">

@@ -66,7 +66,7 @@ export class ClinicRun extends Component {
             try {
                 await this.orm.call("clinic.shift", "action_open", [[shiftId]]);
                 await this.loadShifts();
-            } catch (e) {}
+            } catch (e) { }
         }
         if (actionType === "close_shift") {
             this.action.doAction({
@@ -81,9 +81,7 @@ export class ClinicRun extends Component {
         }
     }
 
-    closeApp() {
-        this.action.doAction({ type: "ir.actions.act_window_close" });
-    }
+
 }
 
 registry.category("actions").add("clinic_run", ClinicRun);
