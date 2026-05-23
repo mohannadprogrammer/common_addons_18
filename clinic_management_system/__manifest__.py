@@ -2,6 +2,7 @@
     'name': 'Clinic Appointment Management',
     'version': '18.0.1.0.0',
     'category': 'Healthcare',
+    
     'summary': 'Manage clinic appointments by shifts with doctor billing',
     'description': """
         Clinic Appointment Management

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <menuitem id="menu_clinic_root" name="Clinic" sequence="10"/>
+    <menuitem id="menu_clinic_root" name="Clinic" sequence="10"
+              web_icon="clinic_management_system,static/description/icon.png"/>
 
     <record id="action_clinic_run" model="ir.actions.client">
         <field name="name">Clinic Run</field>
