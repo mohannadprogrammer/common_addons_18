@@ -8,7 +8,8 @@
             <kanban default_group_by="doctor_id"
                     class="o_kanban_small_column"
                     quick_create="doctor_id"
-                    quick_create_fields="['patient_id', 'shift_id', 'appointment_date', 'product_id']">
+                    quick_create_fields="['patient_id', 'shift_id', 'appointment_date', 'product_id']"
+                    >
                 <field name="name"/>
                 <field name="patient_id"/>
                 <field name="doctor_id"/>

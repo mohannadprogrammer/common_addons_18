@@ -6,7 +6,7 @@ class ClinicAppointment(models.Model):
     _name = 'clinic.appointment'
     _description = 'Clinic Appointment'
     _inherit = ['mail.thread', 'mail.activity.mixin']
-    _order = 'appointment_date desc, id desc'
+    _order = 'appointment_date asc, id desc'
 
     name = fields.Char(string='Reference', readonly=True, copy=False, default='New', tracking=True)
     patient_id = fields.Many2one('clinic.patient', string='Patient', required=True, tracking=True)
