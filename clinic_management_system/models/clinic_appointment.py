@@ -1,5 +1,5 @@
 from odoo import models, fields, api, _
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 
 
 class ClinicAppointment(models.Model):
@@ -72,11 +72,21 @@ class ClinicAppointment(models.Model):
                 return shift.doctor_ids
         return self.env['clinic.doctor'].search([])
 
+    @api.constrains('shift_id')
+    def _check_closed_shift(self):
+        for rec in self:
+            if rec.shift_id and rec.shift_id.state == 'closed':
+                raise ValidationError(_('Cannot assign an appointment to a closed shift.'))
+
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
             if vals.get('name', 'New') == 'New':
                 vals['name'] = self.env['ir.sequence'].next_by_code('clinic.appointment') or 'New'
+            if vals.get('shift_id'):
+                shift = self.env['clinic.shift'].browse(vals['shift_id'])
+                if shift.state == 'closed':
+                    raise UserError(_('Cannot create an appointment for a closed shift.'))
         return super().create(vals_list)
 
     def action_create_invoice(self):

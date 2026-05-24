@@ -24,13 +24,19 @@ class CloseShiftWizard(models.TransientModel):
             )
             res['total_revenue'] = sum(a.invoice_id.amount_total for a in invoiced)
             lines = []
+            existing_bills = shift.doctor_bill_ids
             for doctor in shift.doctor_ids:
                 doctor_appointments = invoiced.filtered(lambda a: a.doctor_id == doctor)
-                amount = sum(doctor.compute_doctor_earning(a.visit_fee) for a in doctor_appointments)
-                lines.append((0, 0, {
-                    'doctor_id': doctor.id,
-                    'amount': amount,
-                }))
+                total_earned = sum(doctor.compute_doctor_earning(a.visit_fee) for a in doctor_appointments)
+                already_billed = sum(
+                    existing_bills.filtered(lambda b: b.doctor_id == doctor).mapped('amount_total')
+                )
+                amount = max(0, total_earned - already_billed)
+                if amount != 0 :
+                    lines.append((0, 0, {
+                        'doctor_id': doctor.id,
+                        'amount': amount,
+                    }))
             res['billing_line_ids'] = lines
             res['total_doctor_billing'] = sum(vals['amount'] for _, _, vals in lines)
         return res

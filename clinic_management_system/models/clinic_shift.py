@@ -139,7 +139,7 @@ class ClinicShift(models.Model):
 
     def write(self, vals):
         for rec in self:
-            if rec.state == 'closed':
+            if rec.state == 'closed' and not self.env.context.get('allow_closed_edit'):
                 raise UserError(_('Cannot modify a closed shift.'))
         if 'doctor_ids' in vals:
             for rec in self:
@@ -183,6 +183,12 @@ class ClinicShift(models.Model):
             if rec.state == 'closed':
                 raise UserError(_('Closed shifts cannot be reset.'))
             rec.state = 'draft'
+
+    def action_reopen(self):
+        self.ensure_one()
+        if self.state != 'closed':
+            raise UserError(_('Only closed shifts can be reopened.'))
+        self.with_context(allow_closed_edit=True).write({'state': 'open'})
 
     def action_view_appointments(self):
         self.ensure_one()
