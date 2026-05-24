@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 
 
@@ -48,10 +48,31 @@ class ClinicDoctor(models.Model):
         string='Appointments', compute='_compute_appointment_count'
     )
 
+    # Related bills
+    bill_ids = fields.One2many('account.move', 'doctor_id', string='Bills')
+    bill_count = fields.Integer(
+        string='Bills', compute='_compute_bill_count'
+    )
+
     @api.depends('appointment_ids')
     def _compute_appointment_count(self):
         for rec in self:
             rec.appointment_count = len(rec.appointment_ids)
+
+    @api.depends('bill_ids')
+    def _compute_bill_count(self):
+        for rec in self:
+            rec.bill_count = len(rec.bill_ids)
+
+    def action_view_bills(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _('Bills'),
+            'res_model': 'account.move',
+            'view_mode': 'list,form',
+            'domain': [('doctor_id', '=', self.id)],
+        }
 
     @api.constrains('billing_percentage')
     def _check_billing_percentage(self):
