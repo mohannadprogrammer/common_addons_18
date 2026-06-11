@@ -1,7 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_clinic_doctor_manager,clinic.doctor manager,model_clinic_doctor,base.group_user,1,1,1,1
-access_clinic_shift_manager,clinic.shift manager,model_clinic_shift,base.group_user,1,1,1,1
-access_clinic_appointment_manager,clinic.appointment manager,model_clinic_appointment,base.group_user,1,1,1,1
-access_clinic_patient_manager,clinic.patient manager,model_clinic_patient,base.group_user,1,1,1,1
-access_close_shift_wizard,close.shift.wizard,model_close_shift_wizard,base.group_user,1,1,1,1
-access_close_shift_billing_line,close.shift.billing.line,model_close_shift_billing_line,base.group_user,1,1,1,1

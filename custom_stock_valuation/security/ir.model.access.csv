@@ -1,4 +1,0 @@
-# No ACL rules needed — this module only adds fields to existing models
-# (stock.move, account.move, product.category, res.company, stock.landed.cost).
-# Permissions are inherited from the underlying model ACLs.
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
