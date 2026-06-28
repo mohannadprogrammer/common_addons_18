@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Settings Action -->
+    <record id="action_custody_config_settings" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module': 'custody_management'}</field>
+    </record>
+
+    <!-- Root Menu -->
+    <menuitem id="menu_custody_management_root" name="Custody Management"
+              sequence="10" web_icon="custody_management,static/description/icon.svg"/>
+
+    <!-- Operations -->
+    <menuitem id="menu_custody_operations" name="Operations"
+              parent="menu_custody_management_root" sequence="10"/>
+
+    <menuitem id="menu_custody_all" name="All Custodies"
+              parent="menu_custody_operations" action="action_custody_custody" sequence="10"/>
+
+    <menuitem id="menu_custody_my_custodies" name="My Custodies"
+              parent="menu_custody_operations" action="action_custody_my_custodies" sequence="20"/>
+
+    <!-- Approvals -->
+    <menuitem id="menu_custody_approvals" name="Approvals"
+              parent="menu_custody_management_root" sequence="20"/>
+
+    <menuitem id="menu_custody_pending_approval" name="Pending Manager Approval"
+              parent="menu_custody_approvals" action="action_custody_pending_approval" sequence="10"
+              groups="custody_management.group_custody_manager"/>
+
+    <menuitem id="menu_custody_finance_approval" name="Pending Finance Approval"
+              parent="menu_custody_approvals" action="action_custody_finance_approval" sequence="20"
+              groups="custody_management.group_custody_finance"/>
+
+    <!-- Transactions -->
+    <menuitem id="menu_custody_transactions" name="Transactions"
+              parent="menu_custody_management_root" sequence="30"/>
+
+    <menuitem id="menu_custody_settlements" name="Settlements"
+              parent="menu_custody_transactions" action="action_custody_settlement" sequence="10"/>
+
+    <menuitem id="menu_custody_payments" name="Payments"
+              parent="menu_custody_transactions" action="action_custody_payment" sequence="20"/>
+
+    <!-- Configuration -->
+    <menuitem id="menu_custody_configuration" name="Configuration"
+              parent="menu_custody_management_root" sequence="50"
+              groups="custody_management.group_custody_finance"/>
+
+    <menuitem id="menu_custody_settings" name="Settings"
+              parent="menu_custody_configuration" action="action_custody_config_settings" sequence="10"
+              groups="custody_management.group_custody_finance"/>
+
+    <!-- Reports -->
+    <menuitem id="menu_custody_reports" name="Reports"
+              parent="menu_custody_management_root" sequence="40"
+              groups="custody_management.group_custody_finance,custody_management.group_custody_administrator"/>
+
+    <menuitem id="menu_custody_ledger_report" name="Custody Ledger"
+              parent="menu_custody_reports" action="action_report_custody_ledger_wizard" sequence="10"/>
+
+    <menuitem id="menu_settlement_report" name="Settlement Report"
+              parent="menu_custody_reports" action="action_report_settlement_wizard" sequence="20"/>
+
+    <menuitem id="menu_audit_trail_report" name="Audit Trail"
+              parent="menu_custody_reports" action="action_report_audit_trail_wizard" sequence="30"/>
+
+</odoo>

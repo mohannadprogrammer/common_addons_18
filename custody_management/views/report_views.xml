@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Paper Format (must be defined before actions that reference it) -->
+    <record id="paperformat_custody_report" model="report.paperformat">
+        <field name="name">Custody Report</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">15</field>
+        <field name="margin_bottom">15</field>
+        <field name="margin_left">10</field>
+        <field name="margin_right">10</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">10</field>
+        <field name="dpi">80</field>
+    </record>
+
+    <!-- Custody Ledger Report -->
+    <record id="view_report_custody_ledger_wizard" model="ir.ui.view">
+        <field name="name">report.custody.ledger.wizard.form</field>
+        <field name="model">report.custody_ledger.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Custody Ledger Report">
+                <p>This report shows all custodies.</p>
+                <footer>
+                    <button name="action_print_report" string="Print" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_report_custody_ledger_wizard" model="ir.actions.act_window">
+        <field name="name">Custody Ledger</field>
+        <field name="res_model">report.custody_ledger.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="action_report_custody_ledger" model="ir.actions.report">
+        <field name="name">Custody Ledger</field>
+        <field name="model">report.custody_ledger.wizard</field>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">custody_management.report_custody_ledger</field>
+        <field name="report_file">custody_management.report_custody_ledger</field>
+        <field name="binding_model_id" ref="model_custody_custody"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <!-- Settlement Report -->
+    <record id="view_report_settlement_wizard" model="ir.ui.view">
+        <field name="name">report.settlement.wizard.form</field>
+        <field name="model">report.settlement.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Settlement Report">
+                <group>
+                    <group>
+                        <field name="date_from" required="1"/>
+                        <field name="date_to" required="1"/>
+                    </group>
+                    <group>
+                        <field name="employee_id"/>
+                        <field name="custody_id"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_print_report" string="Print" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_report_settlement_wizard" model="ir.actions.act_window">
+        <field name="name">Settlement Report</field>
+        <field name="res_model">report.settlement.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="action_report_settlement" model="ir.actions.report">
+        <field name="name">Settlement Report</field>
+        <field name="model">report.settlement.wizard</field>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">custody_management.report_settlement</field>
+        <field name="report_file">custody_management.report_settlement</field>
+        <field name="binding_model_id" ref="model_custody_settlement"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <!-- Audit Trail Report -->
+    <record id="view_report_audit_trail_wizard" model="ir.ui.view">
+        <field name="name">report.audit.trail.wizard.form</field>
+        <field name="model">report.audit_trail.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Audit Trail Report">
+                <group>
+                    <group>
+                        <field name="date_from" required="1"/>
+                        <field name="date_to" required="1"/>
+                    </group>
+                    <group>
+                        <field name="employee_id"/>
+                        <field name="custody_id"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_print_report" string="Print" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_report_audit_trail_wizard" model="ir.actions.act_window">
+        <field name="name">Audit Trail</field>
+        <field name="res_model">report.audit_trail.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="action_report_audit_trail" model="ir.actions.report">
+        <field name="name">Audit Trail</field>
+        <field name="model">report.audit_trail.wizard</field>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">custody_management.report_audit_trail</field>
+        <field name="report_file">custody_management.report_audit_trail</field>
+        <field name="binding_model_id" ref="model_custody_custody"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <!-- QWeb Report Templates -->
+    <template id="report_custody_ledger">
+        <t t-call="web.html_container">
+            <div class="page">
+                <h2>Custody Ledger</h2>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Reference</th>
+                            <th>Employee</th>
+                            <th>Department</th>
+                            <th>Amount</th>
+                            <th>Settled</th>
+                            <th>Balance</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="docs" t-as="doc">
+                            <tr>
+                                <td><span t-field="doc.name"/></td>
+                                <td><span t-field="doc.employee_id.name"/></td>
+                                <td><span t-field="doc.department_id.name"/></td>
+                                <td><span t-field="doc.amount" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;doc.currency_id&quot;}"/></td>
+                                <td><span t-field="doc.total_settled" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;doc.currency_id&quot;}"/></td>
+                                <td><span t-field="doc.remaining_balance" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;doc.currency_id&quot;}"/></td>
+                                <td><span t-field="doc.state"/></td>
+                                <td><span t-field="doc.request_date"/></td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_settlement">
+        <t t-call="web.html_container">
+            <div class="page">
+                <h2>Settlement Report</h2>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Reference</th>
+                            <th>Custody</th>
+                            <th>Employee</th>
+                            <th>Date</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="docs" t-as="doc">
+                            <tr>
+                                <td><span t-field="doc.name"/></td>
+                                <td><span t-field="doc.custody_id.name"/></td>
+                                <td><span t-field="doc.employee_id.name"/></td>
+                                <td><span t-field="doc.expense_date"/></td>
+                                <td><span t-field="doc.description"/></td>
+                                <td><span t-field="doc.amount" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;doc.currency_id&quot;}"/></td>
+                                <td><span t-field="doc.total" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;doc.currency_id&quot;}"/></td>
+                                <td><span t-field="doc.state"/></td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_audit_trail">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <div class="page">
+                    <h2>Audit Trail - <span t-field="doc.name"/></h2>
+                    <p>
+                        <strong>Employee:</strong> <span t-field="doc.employee_id.name"/>
+                        <strong>Amount:</strong> <span t-field="doc.amount" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;doc.currency_id&quot;}"/>
+                    </p>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Author</th>
+                                <th>Message</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="messages" t-as="msg">
+                                <tr>
+                                    <td><span t-field="msg.date"/></td>
+                                    <td><span t-field="msg.author_id.name"/></td>
+                                    <td><span t-field="msg.body"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

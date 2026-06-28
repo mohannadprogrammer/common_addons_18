@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_custody_config_settings" model="ir.ui.view">
+        <field name="name">res.config.settings.custody.form</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="Custody" string="Custody" name="custody_management" logo="/custody_management/static/description/icon.svg">
+                    <block title="Accounting Defaults" name="custody_accounting_defaults">
+                        <setting
+                            type="field"
+                            string="Settlement Journal"
+                            help="Select the default journal to be used when posting custody settlement entries. This can be a general journal, bank journal, or cash journal.">
+                            <field name="custody_settlement_journal_id" options="{'no_create': True}"/>
+                        </setting>
+                        <setting
+                            type="field"
+                            string="Settlement Account"
+                            help="Select the default receivable account used to track employee custody balances. This account must be of type Receivable and will be credited when settlement entries are posted.">
+                            <field name="custody_settlement_account_id" options="{'no_create': True}"/>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+</odoo>

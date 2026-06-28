@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_custody_settlement_form" model="ir.ui.view">
+        <field name="name">custody.settlement.form</field>
+        <field name="model">custody.settlement</field>
+        <field name="arch" type="xml">
+            <form string="Settlement">
+                <header>
+                    <button name="action_confirm" string="Confirm" type="object" class="btn-primary"
+                            invisible="state != 'draft'"/>
+                    <button name="action_post" string="Post" type="object" class="btn-primary"
+                            invisible="state != 'confirmed'"/>
+                    <button name="action_draft" string="Reset to Draft" type="object" class="btn-secondary"
+                            invisible="state != 'confirmed'"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,confirmed,posted"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="%(account.action_account_moves_all_a)d" type="action"
+                                class="oe_stat_button" icon="fa-book"
+                                invisible="not account_move_id"
+                                context="{'view_no_maturity': True}">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Journal Entry</span>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="custody_id" options="{'no_create': True}"/>
+                            <field name="employee_id" readonly="1"/>
+                            <field name="expense_date"/>
+                            <field name="product_id"/>
+                            <field name="vendor_id"/>
+                        </group>
+                        <group>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="description"/>
+                            <field name="amount" widget="monetary"/>
+                            <field name="tax_ids" widget="many2many_tags"/>
+                            <field name="total" widget="monetary"/>
+                        </group>
+                    </group>
+                    <group string="Receipt">
+                        <field name="receipt" filename="receipt_filename"/>
+                        <field name="receipt_filename" invisible="1"/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_custody_settlement_tree" model="ir.ui.view">
+        <field name="name">custody.settlement.tree</field>
+        <field name="model">custody.settlement</field>
+        <field name="arch" type="xml">
+            <list string="Settlements" multi_edit="1">
+                <field name="name"/>
+                <field name="custody_id"/>
+                <field name="expense_date"/>
+                <field name="product_id"/>
+                <field name="description"/>
+                <field name="amount" sum="Total"/>
+                <field name="total" sum="Total"/>
+                <field name="state" widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_custody_settlement_search" model="ir.ui.view">
+        <field name="name">custody.settlement.search</field>
+        <field name="model">custody.settlement</field>
+        <field name="arch" type="xml">
+            <search string="Search Settlements">
+                <field name="name"/>
+                <field name="custody_id"/>
+                <field name="employee_id"/>
+                <field name="description"/>
+                <filter name="filter_draft" string="Draft" domain="[('state', '=', 'draft')]"/>
+                <filter name="filter_confirmed" string="Confirmed" domain="[('state', '=', 'confirmed')]"/>
+                <filter name="filter_posted" string="Posted" domain="[('state', '=', 'posted')]"/>
+                <separator/>
+                <filter name="group_by_state" string="Status" context="{'group_by': 'state'}"/>
+                <filter name="group_by_custody" string="Custody" context="{'group_by': 'custody_id'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_custody_settlement" model="ir.actions.act_window">
+        <field name="name">Settlements</field>
+        <field name="res_model">custody.settlement</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_custody_settlement_search"/>
+    </record>
+
+    <!-- Custody Settlement Wizard View -->
+    <record id="view_custody_settlement_wizard_form" model="ir.ui.view">
+        <field name="name">custody.settlement.wizard.form</field>
+        <field name="model">custody.settlement.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Settle Expenses">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="custody_id" readonly="1"/>
+                            <field name="employee_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="remaining_balance" widget="monetary"/>
+                        </group>
+                    </group>
+                    <field name="line_ids">
+                        <list editable="bottom" create="1">
+                            <field name="expense_date"/>
+                            <field name="product_id"/>
+                            <field name="vendor_id"/>
+                            <field name="description"/>
+                            <field name="amount" widget="monetary"/>
+                            <field name="tax_ids" widget="many2many_tags"/>
+                            <field name="receipt" filename="receipt_filename"/>
+                            <field name="receipt_filename" invisible="1"/>
+                        </list>
+                    </field>
+                </sheet>
+                <footer>
+                    <button name="action_confirm" string="Confirm" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

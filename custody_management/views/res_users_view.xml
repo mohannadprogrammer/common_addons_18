@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_res_users_custody_form_inherit" model="ir.ui.view">
+        <field name="name">res.users.custody.form.inherit</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='account_security']" position="after">
+                <page string="Custody" name="custody_management">
+                    <group>
+                        <group string="Permissions">
+                            <field name="is_custody_user"/>
+                            <field name="is_custody_approver"/>
+                            <field name="is_custody_finance_approver"/>
+
+                        </group>
+                        <group string="Configuration">
+                            <field name="custody_approval_limit" widget="monetary"/>
+                            <field name="custody_team_leader_id"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

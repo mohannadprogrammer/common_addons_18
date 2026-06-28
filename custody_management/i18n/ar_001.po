@@ -1,0 +1,1566 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* custody_management
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-28 04:58+0000\n"
+"PO-Revision-Date: 2026-06-28 04:58+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ar_001\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#. module: custody_management
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_settlement_form
+msgid "<span class=\"o_stat_text\">Journal Entry</span>"
+msgstr "<span class=\"o_stat_text\">قيد اليومية</span>"
+
+#. module: custody_management
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_custody_form
+msgid ""
+"<span class=\"o_stat_value\">Disbursement</span>\n"
+"                                <span class=\"o_stat_text\">Entry</span>"
+msgstr ""
+"<span class=\"o_stat_value\">الصرف</span>\n"
+"                                <span class=\"o_stat_text\">القيد</span>"
+
+#. module: custody_management
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_custody_form
+msgid ""
+"<span class=\"o_stat_value\">Settlement</span>\n"
+"                                <span class=\"o_stat_text\">Entries</span>"
+msgstr ""
+"<span class=\"o_stat_value\">التسوية</span>\n"
+"                                <span class=\"o_stat_text\">القيد</span>"
+
+#. module: custody_management
+#: model_terms:ir.ui.view,arch_db:custody_management.report_audit_trail
+msgid "<strong>Amount:</strong>"
+msgstr "<strong>المبلغ:</strong>"
+
+#. module: custody_management
+#: model_terms:ir.ui.view,arch_db:custody_management.report_audit_trail
+msgid "<strong>Employee:</strong>"
+msgstr "<strong>الموظف:</strong>"
+
+#. module: custody_management
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_custody_form
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_payment_form
+msgid "Accounting"
+msgstr "محاسبة"
+
+#. module: custody_management
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_config_settings
+msgid "Accounting Defaults"
+msgstr "الإعدادات الافتراضية للمحاسبة"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__account_move_id
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__account_move_id
+msgid "Accounting Entry"
+msgstr "قيد محاسبي"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__message_needaction
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__message_needaction
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__message_needaction
+msgid "Action Needed"
+msgstr "إجراء مطلوب"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__activity_ids
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__activity_ids
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__activity_ids
+msgid "Activities"
+msgstr "الأنشطة"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__activity_exception_decoration
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__activity_exception_decoration
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "زخرفة استثناء النشاط"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__activity_state
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__activity_state
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__activity_state
+msgid "Activity State"
+msgstr "حالة النشاط"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__activity_type_icon
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__activity_type_icon
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "أيقونة نوع النشاط"
+
+#. module: custody_management
+#: model:res.groups,name:custody_management.group_custody_administrator
+msgid "Administrator"
+msgstr "مدير النظام"
+
+#. module: custody_management
+#: model:ir.ui.menu,name:custody_management.menu_custody_all
+msgid "All Custodies"
+msgstr "جميع العهد"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_cash_return_wizard__amount
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__amount
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment_wizard__amount
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__amount
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement_wizard_line__amount
+#: model_terms:ir.ui.view,arch_db:custody_management.report_custody_ledger
+#: model_terms:ir.ui.view,arch_db:custody_management.report_settlement
+msgid "Amount"
+msgstr "المبلغ"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__approved_date
+msgid "Approval Date"
+msgstr "تاريخ الاعتماد"
+
+#. module: custody_management
+#: model:ir.ui.menu,name:custody_management.menu_custody_approvals
+msgid "Approvals"
+msgstr "الموافقات"
+
+#. module: custody_management
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_custody_search
+msgid "Approved"
+msgstr "معتمد"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__approved_by
+msgid "Approved By"
+msgstr "اعتمد بواسطة"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__message_attachment_count
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__message_attachment_count
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__message_attachment_count
+msgid "Attachment Count"
+msgstr "عدد المرفقات"
+
+#. module: custody_management
+#: model:ir.actions.act_window,name:custody_management.action_report_audit_trail_wizard
+#: model:ir.actions.report,name:custody_management.action_report_audit_trail
+#: model:ir.ui.menu,name:custody_management.menu_audit_trail_report
+msgid "Audit Trail"
+msgstr "سجل التدقيق"
+
+#. module: custody_management
+#: model_terms:ir.ui.view,arch_db:custody_management.report_audit_trail
+msgid "Audit Trail -"
+msgstr "سجل التدقيق -"
+
+#. module: custody_management
+#: model:ir.model,name:custody_management.model_report_custody_management_report_audit_trail
+#: model_terms:ir.ui.view,arch_db:custody_management.view_report_audit_trail_wizard
+msgid "Audit Trail Report"
+msgstr "تقرير سجل التدقيق"
+
+#. module: custody_management
+#: model:ir.model,name:custody_management.model_report_audit_trail_wizard
+msgid "Audit Trail Report Wizard"
+msgstr "معالج تقرير سجل التدقيق"
+
+#. module: custody_management
+#: model_terms:ir.ui.view,arch_db:custody_management.report_audit_trail
+msgid "Author"
+msgstr "المؤلف"
+
+#. module: custody_management
+#: model_terms:ir.ui.view,arch_db:custody_management.report_custody_ledger
+msgid "Balance"
+msgstr "الرصيد"
+
+#. module: custody_management
+#: model:ir.model.fields,help:custody_management.field_res_users__is_custody_finance_approver
+msgid "Can approve custodies at finance level"
+msgstr "يمكنه اعتماد العهد على المستوى المالي"
+
+#. module: custody_management
+#: model:ir.model.fields,help:custody_management.field_res_users__is_custody_approver
+msgid "Can approve custodies at manager level"
+msgstr "يمكنه اعتماد العهد على مستوى المدير"
+
+#. module: custody_management
+#: model:ir.model.fields,help:custody_management.field_res_users__is_custody_user
+msgid "Can create and manage custodies"
+msgstr "يمكنه إنشاء وإدارة العهد"
+
+#. module: custody_management
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_custody_form
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_payment_wizard_form
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_settlement_wizard_form
+#: model_terms:ir.ui.view,arch_db:custody_management.view_report_audit_trail_wizard
+#: model_terms:ir.ui.view,arch_db:custody_management.view_report_custody_ledger_wizard
+#: model_terms:ir.ui.view,arch_db:custody_management.view_report_settlement_wizard
+msgid "Cancel"
+msgstr "إلغاء"
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/custody.py:0
+msgid "Cancel Custody"
+msgstr "إلغاء العهدة"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_cancel_wizard__reason
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__cancellation_reason
+msgid "Cancellation Reason"
+msgstr "سبب الإلغاء"
+
+#. module: custody_management
+#: model:ir.model.fields.selection,name:custody_management.selection__custody_custody__state__cancelled
+msgid "Cancelled"
+msgstr "ملغى"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__cancelled_by
+msgid "Cancelled By"
+msgstr "ألغي بواسطة"
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/custody_payment.py:0
+msgid "Cannot delete a payment with accounting entry."
+msgstr "لا يمكن حذف دفعة لها قيد محاسبي."
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/custody_payment.py:0
+msgid "Cannot delete a posted payment."
+msgstr "لا يمكن حذف دفعة مرحلة."
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/settlement.py:0
+msgid "Cannot delete a posted settlement."
+msgstr "لا يمكن حذف تسوية مرحّلة."
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/settlement.py:0
+msgid "Cannot delete a settlement with accounting entry."
+msgstr "لا يمكن حذف تسوية لها قيد محاسبي."
+
+#. module: custody_management
+#: model:ir.model.fields.selection,name:custody_management.selection__custody_payment__payment_type__cash_return
+msgid "Cash Return"
+msgstr "إرجاع نقدي"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__cash_return_move_id
+msgid "Cash Return Entry"
+msgstr "قيد الإرجاع النقدي"
+
+#. module: custody_management
+#: model:ir.actions.server,name:custody_management.cron_custody_check_overdue_ir_actions_server
+msgid "Check Overdue Custodies"
+msgstr "فحص العهد المتأخرة"
+
+#. module: custody_management
+#: model:ir.model.fields.selection,name:custody_management.selection__custody_custody__state__closed
+msgid "Closed"
+msgstr "مغلق"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__closed_by
+msgid "Closed By"
+msgstr "أغلق بواسطة"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__closed_date
+msgid "Closing Date"
+msgstr "تاريخ الإغلاق"
+
+#. module: custody_management
+#: model:ir.model,name:custody_management.model_res_company
+msgid "Companies"
+msgstr "الشركات"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__company_id
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__company_id
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__company_id
+msgid "Company"
+msgstr "الشركة"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_res_users__company_currency_id
+msgid "Company Currency"
+msgstr "عملة الشركة"
+
+#. module: custody_management
+#: model:ir.model,name:custody_management.model_res_config_settings
+msgid "Config Settings"
+msgstr "تهيئة الإعدادات"
+
+#. module: custody_management
+#: model:ir.ui.menu,name:custody_management.menu_custody_configuration
+#: model_terms:ir.ui.view,arch_db:custody_management.view_res_users_custody_form_inherit
+msgid "Configuration"
+msgstr "الإعدادات"
+
+#. module: custody_management
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_settlement_form
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_settlement_wizard_form
+msgid "Confirm"
+msgstr "تأكيد"
+
+#. module: custody_management
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_payment_wizard_form
+msgid "Confirm Payment"
+msgstr "تأكيد الدفع"
+
+#. module: custody_management
+#: model:ir.model.fields.selection,name:custody_management.selection__custody_settlement__state__confirmed
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_settlement_search
+msgid "Confirmed"
+msgstr "مؤكد"
+
+#. module: custody_management
+#: model_terms:ir.actions.act_window,help:custody_management.action_custody_custody
+msgid "Create a new custody request"
+msgstr "إنشاء طلب عهدة جديد"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_cancel_wizard__create_uid
+#: model:ir.model.fields,field_description:custody_management.field_custody_cash_return_wizard__create_uid
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__create_uid
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__create_uid
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment_wizard__create_uid
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__create_uid
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement_wizard__create_uid
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement_wizard_line__create_uid
+#: model:ir.model.fields,field_description:custody_management.field_report_audit_trail_wizard__create_uid
+#: model:ir.model.fields,field_description:custody_management.field_report_custody_ledger_wizard__create_uid
+#: model:ir.model.fields,field_description:custody_management.field_report_settlement_wizard__create_uid
+msgid "Created by"
+msgstr "أنشئ بواسطة"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_cancel_wizard__create_date
+#: model:ir.model.fields,field_description:custody_management.field_custody_cash_return_wizard__create_date
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__create_date
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__create_date
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment_wizard__create_date
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__create_date
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement_wizard__create_date
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement_wizard_line__create_date
+#: model:ir.model.fields,field_description:custody_management.field_report_audit_trail_wizard__create_date
+#: model:ir.model.fields,field_description:custody_management.field_report_custody_ledger_wizard__create_date
+#: model:ir.model.fields,field_description:custody_management.field_report_settlement_wizard__create_date
+msgid "Created on"
+msgstr "أنشئ في"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_cash_return_wizard__currency_id
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__currency_id
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__currency_id
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment_wizard__currency_id
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__currency_id
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement_wizard__currency_id
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement_wizard_line__currency_id
+msgid "Currency"
+msgstr "العملة"
+
+#. module: custody_management
+#: model:ir.actions.act_window,name:custody_management.action_custody_custody
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_custody_tree
+msgid "Custodies"
+msgstr "العهد"
+
+#. module: custody_management
+#: model:ir.model,name:custody_management.model_custody_custody
+#: model:ir.model.fields,field_description:custody_management.field_account_bank_statement_line__custody_id
+#: model:ir.model.fields,field_description:custody_management.field_account_move__custody_id
+#: model:ir.model.fields,field_description:custody_management.field_custody_cancel_wizard__custody_id
+#: model:ir.model.fields,field_description:custody_management.field_custody_cash_return_wizard__custody_id
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__custody_id
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment_wizard__custody_id
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__custody_id
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement_wizard__custody_id
+#: model:ir.model.fields,field_description:custody_management.field_report_audit_trail_wizard__custody_id
+#: model:ir.model.fields,field_description:custody_management.field_report_settlement_wizard__custody_id
+#: model_terms:ir.ui.view,arch_db:custody_management.report_settlement
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_config_settings
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_custody_form
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_settlement_search
+#: model_terms:ir.ui.view,arch_db:custody_management.view_res_users_custody_form_inherit
+msgid "Custody"
+msgstr "العهدة"
+
+#. module: custody_management
+#: model:ir.module.category,name:custody_management.module_category_custody_management
+msgid "Custody "
+msgstr "العهد"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__amount
+msgid "Custody Amount"
+msgstr "قيمة العهدة"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_res_users__custody_approval_limit
+msgid "Custody Approval Limit"
+msgstr "حد اعتماد العهدة"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_res_users__is_custody_approver
+msgid "Custody Approver"
+msgstr "معتمد العهد"
+
+#. module: custody_management
+#: model:ir.model,name:custody_management.model_custody_cancel_wizard
+msgid "Custody Cancellation Wizard"
+msgstr "معالج إلغاء العهدة"
+
+#. module: custody_management
+#: model:ir.model,name:custody_management.model_custody_cash_return_wizard
+msgid "Custody Cash Return Wizard"
+msgstr "معالج إرجاع نقدي للعهدة"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_res_users__is_custody_finance_approver
+msgid "Custody Finance Approver"
+msgstr "معتمد العهد المالي"
+
+#. module: custody_management
+#: model:ir.actions.act_window,name:custody_management.action_report_custody_ledger_wizard
+#: model:ir.actions.report,name:custody_management.action_report_custody_ledger
+#: model:ir.ui.menu,name:custody_management.menu_custody_ledger_report
+#: model_terms:ir.ui.view,arch_db:custody_management.report_custody_ledger
+msgid "Custody Ledger"
+msgstr "كشف العهدة"
+
+#. module: custody_management
+#: model:ir.model,name:custody_management.model_report_custody_management_report_custody_ledger
+#: model_terms:ir.ui.view,arch_db:custody_management.view_report_custody_ledger_wizard
+msgid "Custody Ledger Report"
+msgstr "تقرير كشف العهدة"
+
+#. module: custody_management
+#: model:ir.model,name:custody_management.model_report_custody_ledger_wizard
+msgid "Custody Ledger Report Wizard"
+msgstr "معالج تقرير كشف العهدة"
+
+#. module: custody_management
+#: model:ir.module.category,description:custody_management.module_category_custody_management
+#: model:ir.ui.menu,name:custody_management.menu_custody_management_root
+msgid "Custody Management"
+msgstr "إدارة العهد"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__name
+msgid "Custody Number"
+msgstr "رقم العهدة"
+
+#. module: custody_management
+#: model:ir.model,name:custody_management.model_custody_payment
+#: model:ir.model.fields,field_description:custody_management.field_account_bank_statement_line__payment_id
+#: model:ir.model.fields,field_description:custody_management.field_account_move__payment_id
+msgid "Custody Payment"
+msgstr "دفعة عهدة"
+
+#. module: custody_management
+#: model:ir.model,name:custody_management.model_custody_payment_wizard
+msgid "Custody Payment Wizard"
+msgstr "معالج دفع العهدة"
+
+#. module: custody_management
+#: model:ir.model,name:custody_management.model_custody_settlement
+msgid "Custody Settlement"
+msgstr "تسوية العهدة"
+
+#. module: custody_management
+#: model:ir.model,name:custody_management.model_custody_settlement_wizard
+msgid "Custody Settlement Wizard"
+msgstr "معالج تسوية العهدة"
+
+#. module: custody_management
+#: model:ir.model,name:custody_management.model_custody_settlement_wizard_line
+msgid "Custody Settlement Wizard Line"
+msgstr "سطر معالج تسوية العهدة"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_res_users__custody_team_leader_id
+msgid "Custody Team Leader"
+msgstr "قائد فريق العهد"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_res_users__is_custody_user
+msgid "Custody User"
+msgstr "مستخدم العهد"
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/custody.py:0
+msgid "Custody amount must be greater than zero."
+msgstr "يجب أن تكون قيمة العهدة أكبر من صفر."
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/custody.py:0
+msgid "Custody approved by finance."
+msgstr "تم اعتماد العهدة ماليًا."
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/custody.py:0
+msgid "Custody approved by manager."
+msgstr "تم اعتماد العهدة من قبل المدير."
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/custody.py:0
+msgid "Custody cancelled. Reason: %s"
+msgstr "تم إلغاء العهدة. السبب: %s"
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/custody.py:0
+msgid "Custody is already closed or cancelled."
+msgstr "العهدة مغلقة أو ملغاة بالفعل."
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/custody.py:0
+msgid "Custody is not in a valid state for cash return."
+msgstr "العهدة ليست في حالة صالحة للإرجاع النقدي."
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/custody.py:0
+msgid "Custody must be Finance Approved before payment."
+msgstr "يجب أن تكون العهدة معتمدة ماليًا قبل الدفع."
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/custody.py:0
+msgid "Custody must be Paid or Partially Settled to submit settlements."
+msgstr "يجب أن تكون العهدة مدفوعة أو مسواة جزئيًا لتقديم التسويات."
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/custody.py:0
+msgid "Custody must be in Manager Approved state for finance approval."
+msgstr "يجب أن تكون العهدة في حالة اعتماد مدير للموافقة المالية."
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/custody.py:0
+msgid "Custody must be in Manager Approved state to reject."
+msgstr "يجب أن تكون العهدة في حالة اعتماد مدير للرفض."
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/custody.py:0
+msgid "Custody must be in Submitted state for manager approval."
+msgstr "يجب أن تكون العهدة في حالة مقدمة لاعتماد المدير."
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/custody.py:0
+msgid "Custody must be in Submitted state to reject."
+msgstr "يجب أن تكون العهدة في حالة مقدمة للرفض."
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/custody.py:0
+msgid "Custody rejected by finance."
+msgstr "تم رفض العهدة من قبل المالية."
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/custody.py:0
+msgid "Custody rejected by manager."
+msgstr "تم رفض العهدة من قبل المدير."
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/custody.py:0
+msgid "Custody submitted for approval."
+msgstr "تم تقديم العهدة للموافقة."
+
+#. module: custody_management
+#: model_terms:ir.ui.view,arch_db:custody_management.report_audit_trail
+#: model_terms:ir.ui.view,arch_db:custody_management.report_custody_ledger
+#: model_terms:ir.ui.view,arch_db:custody_management.report_settlement
+msgid "Date"
+msgstr "التاريخ"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_res_company__custody_settlement_account_id
+#: model:ir.model.fields,field_description:custody_management.field_res_config_settings__custody_settlement_account_id
+msgid "Default Settlement Account"
+msgstr "حساب التسوية الافتراضي"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_res_company__custody_settlement_journal_id
+#: model:ir.model.fields,field_description:custody_management.field_res_config_settings__custody_settlement_journal_id
+msgid "Default Settlement Journal"
+msgstr "دفتر التسوية الافتراضي"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__department_id
+#: model_terms:ir.ui.view,arch_db:custody_management.report_custody_ledger
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_custody_search
+msgid "Department"
+msgstr "القسم"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__description
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement_wizard_line__description
+#: model_terms:ir.ui.view,arch_db:custody_management.report_settlement
+msgid "Description"
+msgstr "الوصف"
+
+#. module: custody_management
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_custody_form
+msgid "Disburse"
+msgstr "صرف"
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/custody.py:0
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_payment_wizard_form
+msgid "Disburse Custody"
+msgstr "صرف العهدة"
+
+#. module: custody_management
+#: model:ir.model.fields.selection,name:custody_management.selection__custody_payment__payment_type__disbursement
+msgid "Disbursement"
+msgstr "صرف"
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/custody.py:0
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__account_move_id
+msgid "Disbursement Entry"
+msgstr "قيد الصرف"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__journal_id
+msgid "Disbursement Journal"
+msgstr "دفتر الصرف"
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/custody.py:0
+msgid "Disbursement journal is required."
+msgstr "دفتر الصرف مطلوب."
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_cancel_wizard__display_name
+#: model:ir.model.fields,field_description:custody_management.field_custody_cash_return_wizard__display_name
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__display_name
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__display_name
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment_wizard__display_name
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__display_name
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement_wizard__display_name
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement_wizard_line__display_name
+#: model:ir.model.fields,field_description:custody_management.field_report_audit_trail_wizard__display_name
+#: model:ir.model.fields,field_description:custody_management.field_report_custody_ledger_wizard__display_name
+#: model:ir.model.fields,field_description:custody_management.field_report_settlement_wizard__display_name
+msgid "Display Name"
+msgstr "اسم العرض"
+
+#. module: custody_management
+#: model:ir.model.fields.selection,name:custody_management.selection__custody_custody__state__draft
+#: model:ir.model.fields.selection,name:custody_management.selection__custody_payment__state__draft
+#: model:ir.model.fields.selection,name:custody_management.selection__custody_settlement__state__draft
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_custody_search
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_settlement_search
+msgid "Draft"
+msgstr "مسودة"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__due_date
+msgid "Due Date"
+msgstr "تاريخ الاستحقاق"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__employee_id
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__employee_id
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__employee_id
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement_wizard__employee_id
+#: model:ir.model.fields,field_description:custody_management.field_report_audit_trail_wizard__employee_id
+#: model:ir.model.fields,field_description:custody_management.field_report_settlement_wizard__employee_id
+#: model:res.groups,name:custody_management.group_custody_employee
+#: model_terms:ir.ui.view,arch_db:custody_management.report_custody_ledger
+#: model_terms:ir.ui.view,arch_db:custody_management.report_settlement
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_custody_search
+msgid "Employee"
+msgstr "الموظف"
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/custody.py:0
+msgid "Employee is required."
+msgstr "الموظف مطلوب."
+
+#. module: custody_management
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_custody_form
+msgid "Employee..."
+msgstr "الموظف..."
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__expense_date
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement_wizard_line__expense_date
+msgid "Expense Date"
+msgstr "تاريخ المصروف"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement_wizard__line_ids
+msgid "Expense Lines"
+msgstr "بنود المصروفات"
+
+#. module: custody_management
+#: model:res.groups,name:custody_management.group_custody_finance
+msgid "Finance"
+msgstr "المالية"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__finance_approved_date
+msgid "Finance Approval Date"
+msgstr "تاريخ الموافقة المالية"
+
+#. module: custody_management
+#: model:ir.actions.act_window,name:custody_management.action_custody_finance_approval
+msgid "Finance Approvals"
+msgstr "الموافقات المالية"
+
+#. module: custody_management
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_custody_form
+msgid "Finance Approve"
+msgstr "اعتماد مالي"
+
+#. module: custody_management
+#: model:ir.model.fields.selection,name:custody_management.selection__custody_custody__state__finance_approved
+msgid "Finance Approved"
+msgstr "معتمد ماليًا"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__finance_approved_by
+msgid "Finance Approved By"
+msgstr "اعتمد ماليًا بواسطة"
+
+#. module: custody_management
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_custody_form
+msgid "Finance Reject"
+msgstr "رفض مالي"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__message_follower_ids
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__message_follower_ids
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__message_follower_ids
+msgid "Followers"
+msgstr "المتابعون"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__message_partner_ids
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__message_partner_ids
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "المتابعون (جهات اتصال)"
+
+#. module: custody_management
+#: model:ir.model.fields,help:custody_management.field_custody_custody__activity_type_icon
+#: model:ir.model.fields,help:custody_management.field_custody_payment__activity_type_icon
+#: model:ir.model.fields,help:custody_management.field_custody_settlement__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "أيقونة Font Awesome مثل fa-tasks"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_report_audit_trail_wizard__date_from
+#: model:ir.model.fields,field_description:custody_management.field_report_settlement_wizard__date_from
+msgid "From Date"
+msgstr "من تاريخ"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__has_message
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__has_message
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__has_message
+msgid "Has Message"
+msgstr "لديه رسالة"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_cancel_wizard__id
+#: model:ir.model.fields,field_description:custody_management.field_custody_cash_return_wizard__id
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__id
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__id
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment_wizard__id
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__id
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement_wizard__id
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement_wizard_line__id
+#: model:ir.model.fields,field_description:custody_management.field_report_audit_trail_wizard__id
+#: model:ir.model.fields,field_description:custody_management.field_report_custody_ledger_wizard__id
+#: model:ir.model.fields,field_description:custody_management.field_report_settlement_wizard__id
+msgid "ID"
+msgstr "المعرف"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__activity_exception_icon
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__activity_exception_icon
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__activity_exception_icon
+msgid "Icon"
+msgstr "أيقونة"
+
+#. module: custody_management
+#: model:ir.model.fields,help:custody_management.field_custody_custody__activity_exception_icon
+#: model:ir.model.fields,help:custody_management.field_custody_payment__activity_exception_icon
+#: model:ir.model.fields,help:custody_management.field_custody_settlement__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "أيقونة للإشارة إلى نشاط استثنائي."
+
+#. module: custody_management
+#: model:ir.model.fields,help:custody_management.field_custody_custody__message_needaction
+#: model:ir.model.fields,help:custody_management.field_custody_payment__message_needaction
+#: model:ir.model.fields,help:custody_management.field_custody_settlement__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "إذا تم التحديد، فالرسائل الجديدة تتطلب انتباهك."
+
+#. module: custody_management
+#: model:ir.model.fields,help:custody_management.field_custody_custody__message_has_error
+#: model:ir.model.fields,help:custody_management.field_custody_custody__message_has_sms_error
+#: model:ir.model.fields,help:custody_management.field_custody_payment__message_has_error
+#: model:ir.model.fields,help:custody_management.field_custody_payment__message_has_sms_error
+#: model:ir.model.fields,help:custody_management.field_custody_settlement__message_has_error
+#: model:ir.model.fields,help:custody_management.field_custody_settlement__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "إذا تم التحديد، فبعض الرسائل بها خطأ في التسليم."
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__message_is_follower
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__message_is_follower
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__message_is_follower
+msgid "Is Follower"
+msgstr "هل هو متابع"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_cash_return_wizard__journal_id
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__journal_id
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment_wizard__journal_id
+msgid "Journal"
+msgstr "اليومية"
+
+#. module: custody_management
+#: model:ir.model,name:custody_management.model_account_move
+msgid "Journal Entry"
+msgstr "قيد اليومية"
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/custody_payment.py:0
+msgid "Journal is required for payment."
+msgstr "اليومية مطلوبة للدفع."
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_cancel_wizard__write_uid
+#: model:ir.model.fields,field_description:custody_management.field_custody_cash_return_wizard__write_uid
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__write_uid
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__write_uid
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment_wizard__write_uid
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__write_uid
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement_wizard__write_uid
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement_wizard_line__write_uid
+#: model:ir.model.fields,field_description:custody_management.field_report_audit_trail_wizard__write_uid
+#: model:ir.model.fields,field_description:custody_management.field_report_custody_ledger_wizard__write_uid
+#: model:ir.model.fields,field_description:custody_management.field_report_settlement_wizard__write_uid
+msgid "Last Updated by"
+msgstr "آخر تحديث بواسطة"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_cancel_wizard__write_date
+#: model:ir.model.fields,field_description:custody_management.field_custody_cash_return_wizard__write_date
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__write_date
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__write_date
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment_wizard__write_date
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__write_date
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement_wizard__write_date
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement_wizard_line__write_date
+#: model:ir.model.fields,field_description:custody_management.field_report_audit_trail_wizard__write_date
+#: model:ir.model.fields,field_description:custody_management.field_report_custody_ledger_wizard__write_date
+#: model:ir.model.fields,field_description:custody_management.field_report_settlement_wizard__write_date
+msgid "Last Updated on"
+msgstr "آخر تحديث في"
+
+#. module: custody_management
+#: model_terms:ir.actions.act_window,help:custody_management.action_custody_custody
+msgid "Manage employee cash custody, track expenses, and settle advances."
+msgstr "إدارة العهد النقدية للموظفين، تتبع المصروفات، وتسوية السلف."
+
+#. module: custody_management
+#: model:res.groups,name:custody_management.group_custody_manager
+msgid "Manager"
+msgstr "مدير"
+
+#. module: custody_management
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_custody_form
+msgid "Manager Approve"
+msgstr "اعتماد مدير"
+
+#. module: custody_management
+#: model:ir.model.fields.selection,name:custody_management.selection__custody_custody__state__manager_approved
+msgid "Manager Approved"
+msgstr "معتمد من المدير"
+
+#. module: custody_management
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_custody_form
+msgid "Manager Reject"
+msgstr "رفض المدير"
+
+#. module: custody_management
+#: model:ir.model.fields,help:custody_management.field_res_users__custody_approval_limit
+msgid "Maximum custody amount this user can approve"
+msgstr "الحد الأقصى لقيمة العهدة التي يمكن لهذا المستخدم اعتمادها"
+
+#. module: custody_management
+#: model_terms:ir.ui.view,arch_db:custody_management.report_audit_trail
+msgid "Message"
+msgstr "الرسالة"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__message_has_error
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__message_has_error
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__message_has_error
+msgid "Message Delivery error"
+msgstr "خطأ في تسليم الرسالة"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__message_ids
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__message_ids
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__message_ids
+msgid "Messages"
+msgstr "الرسائل"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__my_activity_date_deadline
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__my_activity_date_deadline
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "الموعد النهائي لنشاطي"
+
+#. module: custody_management
+#: model:ir.actions.act_window,name:custody_management.action_custody_my_custodies
+#: model:ir.ui.menu,name:custody_management.menu_custody_my_custodies
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_custody_search
+msgid "My Custodies"
+msgstr "عهدي"
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/custody.py:0
+#: code:addons/custody_management/models/custody_payment.py:0
+#: code:addons/custody_management/models/settlement.py:0
+msgid "New"
+msgstr "جديد"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__activity_date_deadline
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__activity_date_deadline
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "الموعد النهائي للنشاط التالي"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__activity_summary
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__activity_summary
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__activity_summary
+msgid "Next Activity Summary"
+msgstr "ملخص النشاط التالي"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__activity_type_id
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__activity_type_id
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__activity_type_id
+msgid "Next Activity Type"
+msgstr "نوع النشاط التالي"
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/settlement.py:0
+msgid "No expense account found. Please configure product/category expense account."
+msgstr "لم يتم العثور على حساب مصروفات. يرجى تكوين حساب مصروفات المنتج/الفئة."
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/custody_payment.py:0
+#: code:addons/custody_management/models/settlement.py:0
+msgid "No receivable account found. Please configure a Settlement Account on the custody."
+msgstr "لم يتم العثور على حساب مدينة. يرجى تكوين حساب تسوية على العهدة."
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/custody.py:0
+msgid "No remaining balance to return."
+msgstr "لا يوجد رصيد متبقي للإرجاع."
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__message_needaction_counter
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__message_needaction_counter
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__message_needaction_counter
+msgid "Number of Actions"
+msgstr "عدد الإجراءات"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__message_has_error_counter
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__message_has_error_counter
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__message_has_error_counter
+msgid "Number of errors"
+msgstr "عدد الأخطاء"
+
+#. module: custody_management
+#: model:ir.model.fields,help:custody_management.field_custody_custody__message_needaction_counter
+#: model:ir.model.fields,help:custody_management.field_custody_payment__message_needaction_counter
+#: model:ir.model.fields,help:custody_management.field_custody_settlement__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "عدد الرسائل التي تتطلب إجراءً"
+
+#. module: custody_management
+#: model:ir.model.fields,help:custody_management.field_custody_custody__message_has_error_counter
+#: model:ir.model.fields,help:custody_management.field_custody_payment__message_has_error_counter
+#: model:ir.model.fields,help:custody_management.field_custody_settlement__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "عدد الرسائل ذات خطأ في التسليم"
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/settlement.py:0
+msgid "Only confirmed settlements can be posted."
+msgstr "فقط التسويات المؤكدة يمكن ترحيلها."
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/custody.py:0
+msgid "Only draft custodies can be submitted."
+msgstr "فقط العهد المسودة يمكن تقديمها."
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/custody.py:0
+msgid "Only draft or cancelled custodies can be modified."
+msgstr "فقط العهد المسودة أو الملغاة يمكن تعديلها."
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/custody_payment.py:0
+msgid "Only draft payments can be posted."
+msgstr "فقط الدفعات المسودة يمكن ترحيلها."
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/settlement.py:0
+msgid "Only draft settlements can be confirmed."
+msgstr "فقط التسويات المسودة يمكن تأكيدها."
+
+#. module: custody_management
+#: model:ir.ui.menu,name:custody_management.menu_custody_operations
+msgid "Operations"
+msgstr "العمليات"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__is_overdue
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_custody_search
+msgid "Overdue"
+msgstr "متأخر"
+
+#. module: custody_management
+#: model:ir.model.fields.selection,name:custody_management.selection__custody_custody__state__paid
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_custody_search
+msgid "Paid"
+msgstr "مدفوع"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__paid_by
+msgid "Paid By"
+msgstr "دفع بواسطة"
+
+#. module: custody_management
+#: model:ir.model.fields.selection,name:custody_management.selection__custody_custody__state__partially_settled
+msgid "Partially Settled"
+msgstr "مسوى جزئيًا"
+
+#. module: custody_management
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_payment_form
+msgid "Payment"
+msgstr "دفعة"
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/custody_payment.py:0
+msgid "Payment %s of %s %s posted."
+msgstr "تم ترحيل الدفعة %s بقيمة %s %s."
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__payment_count
+msgid "Payment Count"
+msgstr "عدد الدفعات"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__paid_date
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__date
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment_wizard__date
+msgid "Payment Date"
+msgstr "تاريخ الدفع"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_cash_return_wizard__payment_method_id
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__payment_method_id
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment_wizard__payment_method_id
+msgid "Payment Method"
+msgstr "طريقة الدفع"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__name
+msgid "Payment Reference"
+msgstr "مرجع الدفع"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__payment_type
+msgid "Payment Type"
+msgstr "نوع الدفع"
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/wizards/custody_payment_wizard.py:0
+msgid "Payment amount cannot exceed custody amount."
+msgstr "قيمة الدفع لا يمكن أن تتجاوز قيمة العهدة."
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/wizards/custody_payment_wizard.py:0
+msgid "Payment amount must be greater than zero."
+msgstr "يجب أن تكون قيمة الدفع أكبر من صفر."
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/custody.py:0
+#: model:ir.actions.act_window,name:custody_management.action_custody_payment
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__payment_ids
+#: model:ir.ui.menu,name:custody_management.menu_custody_payments
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_custody_form
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_payment_tree
+msgid "Payments"
+msgstr "الدفعات"
+
+#. module: custody_management
+#: model:ir.actions.act_window,name:custody_management.action_custody_pending_approval
+msgid "Pending Approvals"
+msgstr "الموافقات المعلقة"
+
+#. module: custody_management
+#: model:ir.ui.menu,name:custody_management.menu_custody_finance_approval
+msgid "Pending Finance Approval"
+msgstr "بانتظار الموافقة المالية"
+
+#. module: custody_management
+#: model:ir.ui.menu,name:custody_management.menu_custody_pending_approval
+msgid "Pending Manager Approval"
+msgstr "بانتظار موافقة المدير"
+
+#. module: custody_management
+#: model_terms:ir.ui.view,arch_db:custody_management.view_res_users_custody_form_inherit
+msgid "Permissions"
+msgstr "الصلاحيات"
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/wizards/custody_settlement_wizard.py:0
+msgid "Please add at least one expense line."
+msgstr "يرجى إضافة بند مصروف واحد على الأقل."
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/settlement.py:0
+msgid "Please configure a settlement journal on the custody."
+msgstr "يرجى تكوين دفتر تسوية على العهدة."
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/custody.py:0
+msgid "Please select a disbursement journal."
+msgstr "يرجى تحديد دفتر صرف."
+
+#. module: custody_management
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_payment_form
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_settlement_form
+msgid "Post"
+msgstr "ترحيل"
+
+#. module: custody_management
+#: model:ir.model.fields.selection,name:custody_management.selection__custody_payment__state__posted
+#: model:ir.model.fields.selection,name:custody_management.selection__custody_settlement__state__posted
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_settlement_search
+msgid "Posted"
+msgstr "مرحّل"
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/settlement.py:0
+msgid "Posted settlements cannot be reset to draft."
+msgstr "لا يمكن إعادة التسويات المرحّلة إلى مسودة."
+
+#. module: custody_management
+#: model_terms:ir.ui.view,arch_db:custody_management.view_report_audit_trail_wizard
+#: model_terms:ir.ui.view,arch_db:custody_management.view_report_custody_ledger_wizard
+#: model_terms:ir.ui.view,arch_db:custody_management.view_report_settlement_wizard
+msgid "Print"
+msgstr "طباعة"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__product_id
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement_wizard_line__product_id
+msgid "Product"
+msgstr "المنتج"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__purpose
+msgid "Purpose"
+msgstr "الغرض"
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/custody.py:0
+msgid "Purpose is required."
+msgstr "الغرض مطلوب."
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement_wizard_line__receipt
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_settlement_form
+msgid "Receipt"
+msgstr "الإيصال"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__receipt
+msgid "Receipt Attachment"
+msgstr "مرفق الإيصال"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__receipt_filename
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement_wizard_line__receipt_filename
+msgid "Receipt Filename"
+msgstr "اسم ملف الإيصال"
+
+#. module: custody_management
+#: model:ir.model.fields,help:custody_management.field_custody_custody__settlement_account_id
+msgid "Receivable account used for custody settlement entries"
+msgstr "حساب المدين المستخدم لقيود تسوية العهدة"
+
+#. module: custody_management
+#: model_terms:ir.ui.view,arch_db:custody_management.report_custody_ledger
+#: model_terms:ir.ui.view,arch_db:custody_management.report_settlement
+msgid "Reference"
+msgstr "المرجع"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_cash_return_wizard__remaining_balance
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__remaining_balance
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement_wizard__remaining_balance
+msgid "Remaining Balance"
+msgstr "الرصيد المتبقي"
+
+#. module: custody_management
+#: model:ir.ui.menu,name:custody_management.menu_custody_reports
+msgid "Reports"
+msgstr "التقارير"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__request_date
+msgid "Request Date"
+msgstr "تاريخ الطلب"
+
+#. module: custody_management
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_settlement_form
+msgid "Reset to Draft"
+msgstr "إعادة إلى مسودة"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__activity_user_id
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__activity_user_id
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__activity_user_id
+msgid "Responsible User"
+msgstr "المستخدم المسؤول"
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/custody.py:0
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_custody_form
+msgid "Return Cash"
+msgstr "إرجاع نقدي"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_cash_return_wizard__date
+msgid "Return Date"
+msgstr "تاريخ الإرجاع"
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/wizards/custody_cash_return_wizard.py:0
+msgid "Return amount cannot exceed remaining balance."
+msgstr "قيمة الإرجاع لا يمكن أن تتجاوز الرصيد المتبقي."
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/wizards/custody_cash_return_wizard.py:0
+msgid "Return amount must be greater than zero."
+msgstr "يجب أن تكون قيمة الإرجاع أكبر من صفر."
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__message_has_sms_error
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__message_has_sms_error
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "خطأ في تسليم SMS"
+
+#. module: custody_management
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_custody_search
+msgid "Search Custody"
+msgstr "بحث عهدة"
+
+#. module: custody_management
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_settlement_search
+msgid "Search Settlements"
+msgstr "بحث تسويات"
+
+#. module: custody_management
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_config_settings
+msgid "Select the default journal to be used when posting custody settlement entries. This can be a general journal, bank journal, or cash journal."
+msgstr "اختر اليومية الافتراضية المستخدمة عند ترحيل قيود تسوية العهد. يمكن أن تكون يومية عامة أو بنكية أو نقدية."
+
+#. module: custody_management
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_config_settings
+msgid "Select the default receivable account used to track employee custody balances. This account must be of type Receivable and will be credited when settlement entries are posted."
+msgstr "اختر حساب المدين الافتراضي المستخدم لتتبع أرصدة عهد الموظفين. يجب أن يكون هذا الحساب من نوع مدين وسيتم دائنه عند ترحيل قيود التسوية."
+
+#. module: custody_management
+#: model:ir.actions.act_window,name:custody_management.action_custody_config_settings
+#: model:ir.ui.menu,name:custody_management.menu_custody_settings
+msgid "Settings"
+msgstr "الإعدادات"
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/custody.py:0
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_custody_form
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_settlement_wizard_form
+msgid "Settle Expenses"
+msgstr "تسوية المصروفات"
+
+#. module: custody_management
+#: model:ir.model.fields.selection,name:custody_management.selection__custody_custody__state__settled
+#: model_terms:ir.ui.view,arch_db:custody_management.report_custody_ledger
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_custody_search
+msgid "Settled"
+msgstr "مسوى"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_account_bank_statement_line__settlement_id
+#: model:ir.model.fields,field_description:custody_management.field_account_move__settlement_id
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_settlement_form
+msgid "Settlement"
+msgstr "تسوية"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__settlement_account_id
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_config_settings
+msgid "Settlement Account"
+msgstr "حساب التسوية"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__settlement_count
+msgid "Settlement Count"
+msgstr "عدد التسويات"
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/custody.py:0
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__settlement_move_ids
+msgid "Settlement Entries"
+msgstr "قيود التسوية"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__settlement_journal_id
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_config_settings
+msgid "Settlement Journal"
+msgstr "دفتر التسوية"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__name
+msgid "Settlement Reference"
+msgstr "مرجع التسوية"
+
+#. module: custody_management
+#: model:ir.actions.act_window,name:custody_management.action_report_settlement_wizard
+#: model:ir.actions.report,name:custody_management.action_report_settlement
+#: model:ir.model,name:custody_management.model_report_custody_management_report_settlement
+#: model:ir.ui.menu,name:custody_management.menu_settlement_report
+#: model_terms:ir.ui.view,arch_db:custody_management.report_settlement
+#: model_terms:ir.ui.view,arch_db:custody_management.view_report_settlement_wizard
+msgid "Settlement Report"
+msgstr "تقرير التسوية"
+
+#. module: custody_management
+#: model:ir.model,name:custody_management.model_report_settlement_wizard
+msgid "Settlement Report Wizard"
+msgstr "معالج تقرير التسوية"
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/settlement.py:0
+msgid "Settlement amount must be greater than zero."
+msgstr "يجب أن تكون قيمة التسوية أكبر من صفر."
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/settlement.py:0
+msgid "Settlement total exceeds custody remaining balance. Please check the amounts."
+msgstr "إجمالي التسوية يتجاوز الرصيد المتبقي للعهدة. يرجى التحقق من المبالغ."
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/settlement.py:0
+msgid "Settlement with accounting entry cannot be reset."
+msgstr "لا يمكن إعادة تسوية لها قيد محاسبي."
+
+#. module: custody_management
+#. odoo-python
+#: code:addons/custody_management/models/custody.py:0
+#: model:ir.actions.act_window,name:custody_management.action_custody_settlement
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__settlement_ids
+#: model:ir.ui.menu,name:custody_management.menu_custody_settlements
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_custody_form
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_settlement_tree
+msgid "Settlements"
+msgstr "التسويات"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__state
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__state
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__state
+#: model_terms:ir.ui.view,arch_db:custody_management.report_custody_ledger
+#: model_terms:ir.ui.view,arch_db:custody_management.report_settlement
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_custody_search
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_settlement_search
+msgid "Status"
+msgstr "الحالة"
+
+#. module: custody_management
+#: model:ir.model.fields,help:custody_management.field_custody_custody__activity_state
+#: model:ir.model.fields,help:custody_management.field_custody_payment__activity_state
+#: model:ir.model.fields,help:custody_management.field_custody_settlement__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"الحالة بناءً على الأنشطة\n"
+"متأخر: تاريخ الاستحقاق قد مضى\n"
+"اليوم: تاريخ النشاط هو اليوم\n"
+"مخطط: أنشطة مستقبلية."
+
+#. module: custody_management
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_custody_form
+msgid "Submit"
+msgstr "تقديم"
+
+#. module: custody_management
+#: model:ir.model.fields.selection,name:custody_management.selection__custody_custody__state__submitted
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_custody_search
+msgid "Submitted"
+msgstr "مقدّم"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__tax_ids
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement_wizard_line__tax_ids
+msgid "Taxes"
+msgstr "الضرائب"
+
+#. module: custody_management
+#: model:ir.model.fields,help:custody_management.field_res_users__custody_team_leader_id
+msgid "Team leader responsible for this user's custodies"
+msgstr "قائد الفريق المسؤول عن عهد هذا المستخدم"
+
+#. module: custody_management
+#: model_terms:ir.ui.view,arch_db:custody_management.view_report_custody_ledger_wizard
+msgid "This report shows all custodies."
+msgstr "يظهر هذا التقرير جميع العهد."
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_report_audit_trail_wizard__date_to
+#: model:ir.model.fields,field_description:custody_management.field_report_settlement_wizard__date_to
+msgid "To Date"
+msgstr "إلى تاريخ"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__total
+#: model_terms:ir.ui.view,arch_db:custody_management.report_settlement
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_custody_form
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_custody_tree
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_payment_tree
+#: model_terms:ir.ui.view,arch_db:custody_management.view_custody_settlement_tree
+msgid "Total"
+msgstr "الإجمالي"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__total_paid
+msgid "Total Paid"
+msgstr "إجمالي المدفوع"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__total_settled
+msgid "Total Settled"
+msgstr "إجمالي المسوى"
+
+#. module: custody_management
+#: model:ir.ui.menu,name:custody_management.menu_custody_transactions
+msgid "Transactions"
+msgstr "المعاملات"
+
+#. module: custody_management
+#: model:ir.model.fields,help:custody_management.field_custody_custody__activity_exception_decoration
+#: model:ir.model.fields,help:custody_management.field_custody_payment__activity_exception_decoration
+#: model:ir.model.fields,help:custody_management.field_custody_settlement__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "نوع النشاط الاستثنائي على السجل."
+
+#. module: custody_management
+#: model:ir.model,name:custody_management.model_res_users
+msgid "User"
+msgstr "المستخدم"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__vendor_id
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement_wizard_line__vendor_id
+msgid "Vendor"
+msgstr "المورد"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_custody__website_message_ids
+#: model:ir.model.fields,field_description:custody_management.field_custody_payment__website_message_ids
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement__website_message_ids
+msgid "Website Messages"
+msgstr "رسائل الموقع"
+
+#. module: custody_management
+#: model:ir.model.fields,help:custody_management.field_custody_custody__website_message_ids
+#: model:ir.model.fields,help:custody_management.field_custody_payment__website_message_ids
+#: model:ir.model.fields,help:custody_management.field_custody_settlement__website_message_ids
+msgid "Website communication history"
+msgstr "سجل التواصل عبر الموقع"
+
+#. module: custody_management
+#: model:ir.model.fields,field_description:custody_management.field_custody_settlement_wizard_line__wizard_id
+msgid "Wizard"
+msgstr "المعالج"
