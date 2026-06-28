@@ -130,18 +130,20 @@ class CustodyPayment(models.Model):
                 'account_move_id': move.id,
             })
         elif self.payment_type == 'cash_return':
-            # After cash return, if balance is 0 and settled, close
-            if custody.remaining_balance <= 0 and custody.state == 'settled':
-                custody.write({
-                    'state': 'closed',
-                    'closed_by': self.env.user.id,
-                    'closed_date': fields.Datetime.now(),
-                    'cash_return_move_id': move.id,
-                })
-            else:
-                custody.write({
-                    'cash_return_move_id': move.id,
-                })
+            total_settled = sum(custody.settlement_ids.filtered(lambda s: s.state == 'posted').mapped('amount'))
+            total_cash_return = sum(custody.payment_ids.filtered(lambda p: p.payment_type == 'cash_return' and p.state == 'posted').mapped('amount'))
+            remaining = custody.amount - total_settled - total_cash_return
+            vals = {'cash_return_move_id': move.id}
+            if remaining <= 0:
+                if custody.state == 'settled':
+                    vals.update({
+                        'state': 'closed',
+                        'closed_by': self.env.user.id,
+                        'closed_date': fields.Datetime.now(),
+                    })
+                else:
+                    vals['state'] = 'settled'
+            custody.write(vals)
 
         custody.message_post(body=_('Payment %s of %s %s posted.') % (
             self.name, self.amount, self.currency_id.symbol or ''))

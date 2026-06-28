@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_custody_cash_return_wizard_form" model="ir.ui.view">
+        <field name="name">custody.cash.return.wizard.form</field>
+        <field name="model">custody.cash.return.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Return Cash">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="custody_id" readonly="1"/>
+                            <field name="date"/>
+                            <field name="journal_id"/>
+                            <field name="payment_method_id"/>
+                        </group>
+                        <group>
+                            <field name="remaining_balance" widget="monetary"/>
+                            <field name="amount" widget="monetary"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_return" string="Return Cash" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

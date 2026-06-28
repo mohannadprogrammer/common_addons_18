@@ -80,12 +80,13 @@ class Custody(models.Model):
     def _expand_states(self, states, domain, order):
         return [key for key, val in type(self).state.selection]
 
-    @api.depends('settlement_ids', 'settlement_ids.amount')
+    @api.depends('settlement_ids', 'settlement_ids.amount', 'payment_ids', 'payment_ids.amount')
     def _compute_remaining_balance(self):
         for record in self:
             total_settled = sum(record.settlement_ids.mapped('amount'))
-            record.total_settled = total_settled
-            record.remaining_balance = record.amount - total_settled
+            total_cash_return = sum(record.payment_ids.filtered(lambda p: p.payment_type == 'cash_return').mapped('amount'))
+            record.total_settled = total_settled + total_cash_return
+            record.remaining_balance = record.amount - record.total_settled
 
     @api.depends('payment_ids', 'payment_ids.amount')
     def _compute_total_paid(self):
@@ -229,6 +230,8 @@ class Custody(models.Model):
         self.ensure_one()
         if self.state not in ('paid', 'partially_settled'):
             raise UserError(_('Custody must be Paid or Partially Settled to submit settlements.'))
+        if self.remaining_balance <= 0:
+            raise UserError(_('No remaining balance to settle.'))
         return {
             'name': _('Settle Expenses'),
             'type': 'ir.actions.act_window',
@@ -302,9 +305,11 @@ class Custody(models.Model):
     def _update_state_after_settlement(self):
         self.ensure_one()
         total_settled = sum(self.settlement_ids.filtered(lambda s: s.state == 'posted').mapped('amount'))
-        if total_settled >= self.amount:
+        total_cash_return = sum(self.payment_ids.filtered(lambda p: p.payment_type == 'cash_return' and p.state == 'posted').mapped('amount'))
+        total = total_settled + total_cash_return
+        if total >= self.amount:
             self.write({'state': 'settled'})
-        elif total_settled > 0:
+        elif total > 0:
             self.write({'state': 'partially_settled'})
 
 
