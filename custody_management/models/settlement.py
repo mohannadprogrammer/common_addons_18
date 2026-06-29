@@ -66,24 +66,28 @@ class CustodySettlement(models.Model):
     @api.model
     def create(self, vals):
         if vals.get('name', _('New')) == _('New'):
-            vals['name'] = self.env['ir.sequence'].next_by_code('custody.settlement') or _('New')
+            company_id = self.env.company.id
+            if vals.get('custody_id'):
+                company_id = self.env['custody.custody'].browse(vals['custody_id']).company_id.id
+            self.env['custody.custody']._ensure_company_sequence('custody.settlement', company_id)
+            vals['name'] = self.env['ir.sequence'].with_context(force_company=company_id).next_by_code('custody.settlement') or _('New')
         return super().create(vals)
 
-    @api.constrains('amount')
+    @api.constrains('amount', 'total', 'custody_id')
     def _check_amount(self):
         for record in self:
             if record.amount <= 0:
                 raise ValidationError(_('Settlement amount must be greater than zero.'))
+            if record.total > record.custody_id.remaining_balance:
+                raise ValidationError(_(
+                    'Settlement total exceeds custody remaining balance. '
+                    'Please check the amounts.'
+                ))
 
     def action_confirm(self):
         for record in self:
             if record.state != 'draft':
                 raise UserError(_('Only draft settlements can be confirmed.'))
-            if record.total > record.custody_id.remaining_balance + record.amount:
-                raise UserError(_(
-                    'Settlement total exceeds custody remaining balance. '
-                    'Please check the amounts.'
-                ))
         self.write({'state': 'confirmed'})
 
     def action_post(self):
@@ -103,12 +107,12 @@ class CustodySettlement(models.Model):
     def _create_account_move(self):
         self.ensure_one()
         custody = self.custody_id
-        journal = custody.settlement_journal_id or self.env['account.journal'].search([
+        journal = custody.custody_journal_id or self.env['account.journal'].search([
             ('type', '=', 'general'),
             ('company_id', '=', self.company_id.id),
         ], limit=1)
         if not journal:
-            raise UserError(_('Please configure a settlement journal on the custody.'))
+            raise UserError(_('Please configure a custody journal on the custody.'))
 
         move_vals = {
             'journal_id': journal.id,
@@ -164,14 +168,14 @@ class CustodySettlement(models.Model):
         move_vals['line_ids'] = debit_lines
 
         # Credit: Employee Advance (Custody) account
-        advance_account = custody.settlement_account_id
+        advance_account = custody.custody_account_id
         if not advance_account:
             advance_account = self.env['account.account'].with_company(self.company_id).search([
                 ('account_type', '=', 'asset_receivable'),
                 ('deprecated', '=', False),
             ], limit=1)
         if not advance_account:
-            raise UserError(_('No receivable account found. Please configure a Settlement Account on the custody.'))
+            raise UserError(_('No receivable account found. Please configure a Custody Account on the custody.'))
 
         move_vals['line_ids'].append((0, 0, {
             'name': 'Employee Advance - %s' % custody.name,
@@ -192,6 +196,12 @@ class CustodySettlement(models.Model):
         # Update custody state
         custody._update_state_after_settlement()
         return move
+
+    def write(self, vals):
+        for record in self:
+            if record.state == 'posted':
+                raise UserError(_('Cannot modify a posted settlement.'))
+        return super().write(vals)
 
     def unlink(self):
         for record in self:

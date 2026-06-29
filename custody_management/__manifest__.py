@@ -24,6 +24,7 @@ Provide approvals and audit trails.
         'data/custody_sequence.xml',
         'data/custody_data.xml',
         'wizards/custody_cash_return_wizard_view.xml',
+        'wizards/custody_cancel_wizard_view.xml',
         'views/custody_view.xml',
         'views/settlement_view.xml',
         'views/custody_payment_view.xml',

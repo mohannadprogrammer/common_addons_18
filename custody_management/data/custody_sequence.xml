@@ -7,6 +7,7 @@
             <field name="prefix">CST/</field>
             <field name="padding">5</field>
             <field name="company_id" eval="False"/>
+            <field name="implementation">no_gap</field>
         </record>
 
         <record id="seq_custody_settlement" model="ir.sequence">
@@ -15,6 +16,7 @@
             <field name="prefix">STL/</field>
             <field name="padding">5</field>
             <field name="company_id" eval="False"/>
+            <field name="implementation">no_gap</field>
         </record>
 
         <record id="seq_custody_payment" model="ir.sequence">
@@ -23,6 +25,7 @@
             <field name="prefix">PAY/</field>
             <field name="padding">5</field>
             <field name="company_id" eval="False"/>
+            <field name="implementation">no_gap</field>
         </record>
     </data>
 </odoo>

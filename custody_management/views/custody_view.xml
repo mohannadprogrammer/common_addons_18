@@ -74,24 +74,27 @@
                             <field name="purpose" readonly="state != 'draft'"/>
                         </group>
                         <group>
-                            <field name="amount" widget="monetary"/>
+                            <field name="amount" widget="monetary" readonly="state not in ('draft', 'submitted', 'manager_approved')"/>
                             <field name="total_settled" widget="monetary"/>
                             <field name="remaining_balance" widget="monetary"/>
                             <field name="is_overdue" invisible="1"/>
-                            <field name="journal_id"
+                            <field name="payment_journal_id"
                                    options="{'no_create': True}"
-                                   groups="custody_management.group_custody_finance"/>
-                            <field name="settlement_journal_id"
+                                   groups="custody_management.group_custody_finance"
+                                   readonly="state in ('paid', 'partially_settled', 'settled', 'closed')"/>
+                            <field name="custody_journal_id"
                                    options="{'no_create': True}"
-                                   groups="custody_management.group_custody_finance"/>
-                            <field name="settlement_account_id"
+                                   groups="custody_management.group_custody_finance"
+                                   readonly="state in ('paid', 'partially_settled', 'settled', 'closed')"/>
+                            <field name="custody_account_id"
                                    options="{'no_create': True}"
-                                   groups="custody_management.group_custody_finance"/>
+                                   groups="custody_management.group_custody_finance"
+                                   readonly="state in ('paid', 'partially_settled', 'settled', 'closed')"/>
                         </group>
                     </group>
                     <notebook>
                         <page string="Settlements">
-                            <field name="settlement_ids" readonly="state == 'closed'">
+                            <field name="settlement_ids" readonly="1">
                                 <list>
                                     <field name="name"/>
                                     <field name="expense_date"/>

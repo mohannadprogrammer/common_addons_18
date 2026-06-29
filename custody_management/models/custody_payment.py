@@ -40,7 +40,11 @@ class CustodyPayment(models.Model):
     @api.model
     def create(self, vals):
         if vals.get('name', _('New')) == _('New'):
-            vals['name'] = self.env['ir.sequence'].next_by_code('custody.payment') or _('New')
+            company_id = self.env.company.id
+            if vals.get('custody_id'):
+                company_id = self.env['custody.custody'].browse(vals['custody_id']).company_id.id
+            self.env['custody.custody']._ensure_company_sequence('custody.payment', company_id)
+            vals['name'] = self.env['ir.sequence'].with_context(force_company=company_id).next_by_code('custody.payment') or _('New')
         return super().create(vals)
 
     def action_post(self):
@@ -52,18 +56,18 @@ class CustodyPayment(models.Model):
     def _create_account_move(self):
         self.ensure_one()
         custody = self.custody_id
-        journal = self.journal_id or custody.journal_id
+        journal = self.journal_id or custody.payment_journal_id
         if not journal:
             raise UserError(_('Journal is required for payment.'))
 
-        advance_account = custody.settlement_account_id
+        advance_account = custody.custody_account_id
         if not advance_account:
             advance_account = self.env['account.account'].with_company(self.company_id).search([
                 ('account_type', '=', 'asset_receivable'),
                 ('deprecated', '=', False),
             ], limit=1)
         if not advance_account:
-            raise UserError(_('No receivable account found. Please configure a Settlement Account on the custody.'))
+            raise UserError(_('No receivable account found. Please configure a Custody Account on the custody.'))
 
         partner = self.employee_id.work_contact_id or self.employee_id.user_id.partner_id
 
@@ -149,6 +153,12 @@ class CustodyPayment(models.Model):
             self.name, self.amount, self.currency_id.symbol or ''))
 
         return move
+
+    def write(self, vals):
+        for record in self:
+            if record.state == 'posted':
+                raise UserError(_('Cannot modify a posted payment.'))
+        return super().write(vals)
 
     def unlink(self):
         for record in self:

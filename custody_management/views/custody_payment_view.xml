@@ -21,14 +21,14 @@
                         <group>
                             <field name="custody_id" readonly="1"/>
                             <field name="employee_id" readonly="1"/>
-                            <field name="payment_type"/>
-                            <field name="date"/>
+                            <field name="payment_type" readonly="state == 'posted'"/>
+                            <field name="date" readonly="state == 'posted'"/>
                         </group>
                         <group>
                             <field name="currency_id" invisible="1"/>
-                            <field name="amount" widget="monetary"/>
-                            <field name="journal_id" options="{'no_create': True}"/>
-                            <field name="payment_method_id" options="{'no_create': True}"/>
+                            <field name="amount" widget="monetary" readonly="state == 'posted'"/>
+                            <field name="journal_id" options="{'no_create': True}" readonly="state == 'posted'"/>
+                            <field name="payment_method_id" options="{'no_create': True}" readonly="state == 'posted'"/>
                         </group>
                     </group>
                     <group string="Accounting">

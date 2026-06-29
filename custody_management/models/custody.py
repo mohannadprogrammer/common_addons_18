@@ -30,13 +30,13 @@ class Custody(models.Model):
     purpose = fields.Text(string='Purpose', required=True)
     request_date = fields.Date(string='Request Date', default=fields.Date.context_today, required=True)
     due_date = fields.Date(string='Due Date')
-    journal_id = fields.Many2one('account.journal', string='Disbursement Journal',
-                                 domain="[('type', 'in', ['bank', 'cash']), ('company_id', '=', company_id)]")
-    settlement_journal_id = fields.Many2one('account.journal', string='Settlement Journal',
-                                            domain="[('type', 'in', ['bank', 'cash', 'general']), ('company_id', '=', company_id)]")
-    settlement_account_id = fields.Many2one('account.account', string='Settlement Account',
-                                            domain="[('account_type', '=', 'asset_receivable'), ('deprecated', '=', False)]",
-                                            help="Receivable account used for custody settlement entries")
+    payment_journal_id = fields.Many2one('account.journal', string='Payment Journal',
+                                         domain="[('type', 'in', ['bank', 'cash']), ('company_id', '=', company_id)]")
+    custody_journal_id = fields.Many2one('account.journal', string='Custody Journal',
+                                         domain="[('type', 'in', ['bank', 'cash', 'general']), ('company_id', '=', company_id)]")
+    custody_account_id = fields.Many2one('account.account', string='Custody Account',
+                                         domain="[('account_type', '=', 'asset_receivable'), ('deprecated', '=', False)]",
+                                         help="Receivable account used for custody entries")
 
     state = fields.Selection([
         ('draft', 'Draft'),
@@ -117,16 +117,32 @@ class Custody(models.Model):
     def default_get(self, fields_list):
         res = super().default_get(fields_list)
         company = self.env.company
-        if 'settlement_journal_id' in fields_list and not res.get('settlement_journal_id'):
-            res['settlement_journal_id'] = company.custody_settlement_journal_id.id
-        if 'settlement_account_id' in fields_list and not res.get('settlement_account_id'):
-            res['settlement_account_id'] = company.custody_settlement_account_id.id
+        if 'payment_journal_id' in fields_list and not res.get('payment_journal_id'):
+            res['payment_journal_id'] = company.custody_payment_journal_id.id
+        if 'custody_journal_id' in fields_list and not res.get('custody_journal_id'):
+            res['custody_journal_id'] = company.custody_journal_id.id
+        if 'custody_account_id' in fields_list and not res.get('custody_account_id'):
+            res['custody_account_id'] = company.custody_account_id.id
         return res
+
+    @api.model
+    def _ensure_company_sequence(self, code, company_id):
+        Sequence = self.env['ir.sequence'].sudo()
+        if not Sequence.search([('code', '=', code), ('company_id', '=', company_id)], limit=1):
+            template = Sequence.search([('code', '=', code), ('company_id', '=', False)], limit=1)
+            if template:
+                company = self.env['res.company'].browse(company_id)
+                template.copy({
+                    'company_id': company_id,
+                    'name': '%s - %s' % (template.name, company.name),
+                })
 
     @api.model
     def create(self, vals):
         if vals.get('name', _('New')) == _('New'):
-            vals['name'] = self.env['ir.sequence'].next_by_code('custody.custody') or _('New')
+            company_id = vals.get('company_id', self.env.company.id)
+            self._ensure_company_sequence('custody.custody', company_id)
+            vals['name'] = self.env['ir.sequence'].with_context(force_company=company_id).next_by_code('custody.custody') or _('New')
         return super().create(vals)
 
     @api.constrains('amount')
@@ -134,6 +150,20 @@ class Custody(models.Model):
         for record in self:
             if record.amount <= 0:
                 raise ValidationError(_('Custody amount must be greater than zero.'))
+
+    def write(self, vals):
+        for record in self:
+            if record.state in ('paid', 'partially_settled', 'settled', 'closed'):
+                if 'payment_journal_id' in vals:
+                    raise UserError(_('Payment journal cannot be changed after custody is paid.'))
+                if 'custody_journal_id' in vals:
+                    raise UserError(_('Custody journal cannot be changed after custody is paid.'))
+                if 'custody_account_id' in vals:
+                    raise UserError(_('Custody account cannot be changed after custody is paid.'))
+            if 'amount' in vals:
+                if record.state not in ('draft', 'submitted', 'manager_approved'):
+                    raise UserError(_('Custody amount cannot be changed after finance approval.'))
+        return super().write(vals)
 
     def _check_can_modify(self):
         self.ensure_one()
@@ -175,8 +205,8 @@ class Custody(models.Model):
         for record in self:
             if record.state != 'manager_approved':
                 raise UserError(_('Custody must be in Manager Approved state for finance approval.'))
-            if not record.journal_id:
-                raise UserError(_('Please select a disbursement journal.'))
+            if not record.payment_journal_id:
+                raise UserError(_('Please select a payment journal.'))
         self.write({
             'state': 'finance_approved',
             'finance_approved_by': self.env.user.id,
@@ -195,8 +225,8 @@ class Custody(models.Model):
         self.ensure_one()
         if self.state != 'finance_approved':
             raise UserError(_('Custody must be Finance Approved before payment.'))
-        if not self.journal_id:
-            raise UserError(_('Disbursement journal is required.'))
+        if not self.payment_journal_id:
+            raise UserError(_('Payment journal is required.'))
 
         return {
             'name': _('Disburse Custody'),
@@ -207,7 +237,7 @@ class Custody(models.Model):
             'context': {
                 'default_custody_id': self.id,
                 'default_amount': self.amount,
-                'default_journal_id': self.journal_id.id,
+                'default_journal_id': self.payment_journal_id.id,
             },
         }
 
