@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="ashapy_layout">
+            <div style="font-family: 'Cairo';">
+                <div t-attf-class="header o_company_#{company.id}_layout" style="border-bottom: 1px solid #fff; margin-bottom: 10px; padding-bottom: 10px;">
+                    <table style="width: 100%; border: 1px solid #fff; direction: ltr; border-collapse: collapse;">
+                        <tr style="border: none;">
+                            <td style="width: 33%; vertical-align: middle; text-align: left; border: none;">
+                                <div style="font-size: 20px; font-weight: bold;">Ashapy Solar Energy Systems</div>
+<!--                                     
+                                <div style="font-size: 11px; line-height: 1.6; margin-top: 3px;">
+                                    0912314359 
+                                </div>
+                                 <div style="font-size: 11px; line-height: 1.6; margin-top: 3px;">
+                                    0920080304 
+                                </div>
+                                 <div style="font-size: 11px; line-height: 1.6; margin-top: 3px;">
+                                    0122666419
+                                </div> -->
+                            </td>
+                            <td style="width: 34%; vertical-align: middle; text-align: center; border: none;">
+                                <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 90px;" alt="Logo"/>
+                            </td>
+                            <td style="width: 33%; vertical-align: middle; text-align: right; border: none;">
+                                <div style="font-size: 20px; font-weight: bold;">عشابي لأنظمة الطاقة الشمسية</div>
+                                <div style="font-size: 11px; line-height: 1.6; margin-top: 3px; direction: ltr;">
+                                    <span t-if="not company.is_company_details_empty" t-field="company.company_details"/>
+                            <t t-else="" t-esc="company.partner_id._display_address()"/>
+                                    </div>
+                                <!-- <div style="font-size: 11px; line-height: 1.6; margin-top: 3px; direction: ltr;">
+                                    0912314359 | 0920080304 | 0122666419
+                                </div> -->
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <t t-set="layout_background_url"
+                t-value="'data:image/png;base64,%s' % company.layout_background_image.decode('utf-8') if company.layout_background_image and company.layout_background == 'Custom' else
+                        '/base/static/img/demo_logo_report.png' if company.layout_background == 'Demo logo' else ''" />
+                <div t-attf-class="o_company_#{company.id}_layout article o_snail_mail o_table_standard {{'o_report_layout_background' if company.layout_background != 'Blank' else ''}}"
+                    t-attf-style="{{ 'background-image: url(%s);' % layout_background_url if layout_background_url else '' }}"
+                    t-att-data-oe-model="o and o._name"
+                    t-att-data-oe-id="o and o.id"
+                    t-att-data-oe-lang="o and o.env.context.get('lang')">
+                    <t t-out="0"/>
+                </div>
+
+                <div t-attf-class="footer o_company_#{company.id}_layout {{report_type != 'pdf' and 'mt-auto'}}">
+                    <div class="o_footer_content border-top pt-2" style="text-align: center; font-size: 10px; line-height: 1.5;">
+                        <div style="font-weight: bold;">عشابي لأنظمة الطاقه الشمسيه</div>
+                        <div>بحري الحلفايا - شارع الكبري - غرب تقاطع اللزير قاب - شارع العرضه</div>
+                        <div>0912314359 - 0920080304 - 0122666419</div>
+                        <div t-if="report_type == 'pdf'" style="margin-top: 3px;">
+                            Page <span class="page"/> 1
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <record id="report_layout_ashapy" model="report.layout">
+            <field name="name">Ashapy Layout</field>
+            <field name="sequence">10</field>
+            <field name="view_id" ref="ashapy_document_layout.ashapy_layout"/>
+        </record>
+    </data>
+</odoo>

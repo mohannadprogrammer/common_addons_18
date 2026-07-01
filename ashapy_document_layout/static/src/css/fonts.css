@@ -1,0 +1,17 @@
+@font-face {
+    font-family: 'Cairo';
+    font-style: normal;
+    font-weight: 200 1000;
+    src: url(/ashapy_document_layout/static/src/fonts/Cairo-Variable.ttf) format('truetype');
+}
+
+[class*="o_company_"] {
+    font-family: 'Cairo', sans-serif !important;
+}
+
+.o_report_layout_standard,
+.o_report_layout_boxed,
+.o_report_layout_bold,
+.o_report_layout_striped {
+    font-family: 'Cairo', sans-serif !important;
+}
