@@ -16,7 +16,7 @@
     'depends': ['web', 'account'],
     'data': [
         'report/ashapy_layout.xml',
-        'report/ashapy_invoice_report.xml',
+        # 'report/ashapy_invoice_report.xml',
     ],
     'assets': {
         'web.report_assets_common': [

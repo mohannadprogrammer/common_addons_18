@@ -6,18 +6,15 @@
                 <div t-attf-class="header o_company_#{company.id}_layout" style="border-bottom: 1px solid #fff; margin-bottom: 10px; padding-bottom: 10px;">
                     <table style="width: 100%; border: 1px solid #fff; direction: ltr; border-collapse: collapse;">
                         <tr style="border: none;">
-                            <td style="width: 33%; vertical-align: middle; text-align: left; border: none;">
-                                <div style="font-size: 20px; font-weight: bold;">Ashapy Solar Energy Systems</div>
-<!--                                     
-                                <div style="font-size: 11px; line-height: 1.6; margin-top: 3px;">
-                                    0912314359 
+                            <td style="width: 33%; vertical-align: middle; horizontal-align: left; text-align: left; border: none;">
+                                <div style="font-size: 22px; font-weight: bold;">Ashapy Solar Energy Systems</div>
+                                    
+                                <div style="font-size: 11px; line-height: 1.6; margin-top: 3px; direction: ltr;">
+                                    <span t-field="company.company_details"/>
+                                    </div>
+                                <div style="font-size: 11px; line-height: 1.6; margin-top: 3px; direction: ltr;">
+                                    0912314359 | 0920080304 | 0122666419
                                 </div>
-                                 <div style="font-size: 11px; line-height: 1.6; margin-top: 3px;">
-                                    0920080304 
-                                </div>
-                                 <div style="font-size: 11px; line-height: 1.6; margin-top: 3px;">
-                                    0122666419
-                                </div> -->
                             </td>
                             <td style="width: 34%; vertical-align: middle; text-align: center; border: none;">
                                 <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 90px;" alt="Logo"/>
@@ -25,12 +22,11 @@
                             <td style="width: 33%; vertical-align: middle; text-align: right; border: none;">
                                 <div style="font-size: 20px; font-weight: bold;">عشابي لأنظمة الطاقة الشمسية</div>
                                 <div style="font-size: 11px; line-height: 1.6; margin-top: 3px; direction: ltr;">
-                                    <span t-if="not company.is_company_details_empty" t-field="company.company_details"/>
-                            <t t-else="" t-esc="company.partner_id._display_address()"/>
+                                    <span t-field="company.company_details"/>
                                     </div>
-                                <!-- <div style="font-size: 11px; line-height: 1.6; margin-top: 3px; direction: ltr;">
+                                <div style="font-size: 11px; line-height: 1.6; margin-top: 3px; direction: ltr;">
                                     0912314359 | 0920080304 | 0122666419
-                                </div> -->
+                                </div>
                             </td>
                         </tr>
                     </table>
@@ -53,7 +49,7 @@
                         <div>بحري الحلفايا - شارع الكبري - غرب تقاطع اللزير قاب - شارع العرضه</div>
                         <div>0912314359 - 0920080304 - 0122666419</div>
                         <div t-if="report_type == 'pdf'" style="margin-top: 3px;">
-                            Page <span class="page"/> 1
+                            Page <span class="page"/> 
                         </div>
                     </div>
                 </div>
