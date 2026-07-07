@@ -550,7 +550,7 @@ msgstr "توازن"
 #: model:ir.actions.report,name:dynamic_accounts_report.action_print_balance_sheet
 #: model:ir.ui.menu,name:dynamic_accounts_report.menu_balance_sheet_report
 msgid "Balance Sheet"
-msgstr "ورقة التوازن"
+msgstr "الميزانية العمومية"
 
 #. module: dynamic_accounts_report
 #: model:ir.actions.client,name:dynamic_accounts_report.action_bank_book

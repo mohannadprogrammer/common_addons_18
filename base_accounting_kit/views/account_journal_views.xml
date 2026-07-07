@@ -25,9 +25,9 @@
                     </a>
                 </t>
             </xpath>
-            <xpath expr="//button[@id='all_transactions_btn']" position="attributes">
+            <!-- <xpath expr="//button[@id='all_transactions_btn']" position="attributes">
                 <attribute name="name">action_open_reconcile</attribute>
-            </xpath>
+            </xpath> -->
         </field>
     </record>
 </odoo>
