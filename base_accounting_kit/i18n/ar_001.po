@@ -4130,3 +4130,8 @@ msgstr "إدخالات لم تتم تسويتها"
 #, python-format
 msgid "vendor bills"
 msgstr "فواتير البائعين"
+
+#. module: account
+#: model:ir.ui.menu,name:account.menu_finance
+msgid "Accounting"
+msgstr "حسابات"

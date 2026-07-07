@@ -419,29 +419,29 @@ msgstr "حسابات"
 #. module: dynamic_accounts_report
 #: model:ir.actions.report,name:dynamic_accounts_report.action_print_aged_payable
 msgid "Age Payable"
-msgstr "العمر المستحق"
+msgstr "عمر الذمم الدائنة"
 
 #. module: dynamic_accounts_report
 #: model:ir.actions.report,name:dynamic_accounts_report.action_print_aged_receivable
 msgid "Age Receivable"
-msgstr "العمر المستحق"
+msgstr "عمر الذمم المدينة"
 
 #. module: dynamic_accounts_report
 #: model:ir.actions.client,name:dynamic_accounts_report.action_aged_payable
 #: model:ir.ui.menu,name:dynamic_accounts_report.aged_payable_menu
 msgid "Aged Payable"
-msgstr "العمر المستحق"
+msgstr "عمر الذمم الدائنة"
 
 #. module: dynamic_accounts_report
 #: model:ir.model,name:dynamic_accounts_report.model_age_payable_report
 msgid "Aged Payable Report"
-msgstr "تقرير المسنين المستحق الدفع"
+msgstr "تقرير  الذمم الدائنة"
 
 #. module: dynamic_accounts_report
 #: model:ir.actions.client,name:dynamic_accounts_report.action_aged_receivable
 #: model:ir.ui.menu,name:dynamic_accounts_report.aged_receivable_menu
 msgid "Aged Receivable"
-msgstr "العمر المستحق"
+msgstr "العمر  الذمم المدينة"
 
 #. module: dynamic_accounts_report
 #: model:ir.model,name:dynamic_accounts_report.model_age_receivable_report
